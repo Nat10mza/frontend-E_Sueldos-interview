@@ -1,5 +1,5 @@
 <mat-drawer-container
-  class="example-container h-[50vh] max-w-[60em] w-[90vw] rounded-3xl bg-[#FAE6E8]"
+  class="flex items-center justify-center min-h-80 max-w-[90em] w-[90vw] rounded-3xl bg-[#FAE6E8]"
   autosize
 >
   <mat-drawer #drawer class="example-sidenav" mode="side">
@@ -13,18 +13,18 @@
       Delete user
     </button>
   </mat-drawer>
-
-  <div class="example-sidenav-content">
+  <div class="example-sidenav-content h-full">
     <button
       type="button"
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       color="primary"
+      class="absolute top-1/2 left-1/2 -translate-x-1/2"
       mat-raised-button
       (click)="drawer.toggle()"
       *ngIf="!drawer.opened"
     >
       Open User Managing
     </button>
+
     <section *ngIf="drawer.opened">
       <table
         mat-table

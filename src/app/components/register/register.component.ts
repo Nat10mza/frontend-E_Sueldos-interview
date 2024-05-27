@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { RegisterFormComponent } from './register-form/register-form.component';
 
 @Component({
   selector: 'app-register',
@@ -6,7 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  onclick() {
-    alert('Register working');
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(RegisterFormComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

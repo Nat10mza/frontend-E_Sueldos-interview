@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 @Component({
   selector: 'app-login',
@@ -6,7 +9,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  onLogin() {
-    alert('Login working');
+  constructor(public dialog: MatDialog) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(LoginFormComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
