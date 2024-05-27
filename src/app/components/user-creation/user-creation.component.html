@@ -26,7 +26,11 @@
       Open User Managing
     </button>
     <section *ngIf="drawer.opened">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8 w-full"
+      >
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
