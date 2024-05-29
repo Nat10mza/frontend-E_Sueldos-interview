@@ -23,7 +23,6 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-user-creation',
   templateUrl: './user-creation.component.html',
-  styleUrls: ['./user-creation.component.css'],
 })
 export class UserCreationComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];

@@ -28,12 +28,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatInputModule,
     MatFormFieldModule,
   ],
-  exports: [
-    NavbarComponent,
-    RegisterComponent,
-    LoginComponent,
-    LoginFormComponent,
-    RegisterFormComponent,
-  ],
+  exports: [NavbarComponent],
 })
 export class NavbarModule {}
