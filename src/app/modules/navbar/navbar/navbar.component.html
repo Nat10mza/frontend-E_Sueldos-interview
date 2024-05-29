@@ -1,9 +1,9 @@
 <div
-  class="px-16 py-2 bg-[#FDFBFF] fixed top-0 left-0 z-50 flex border-b border-[#F44336] w-full justify-between"
+  class="fixed left-0 top-0 z-50 flex w-full justify-between border-b border-[#F44336] bg-[#FDFBFF] px-16 py-2"
 >
-  <button (click)="goToHome()" class="flex items-center group">
+  <button (click)="goToHome()" class="group flex items-center">
     <img
-      class="group-hover:scale-110 transition"
+      class="transition group-hover:scale-110"
       width="40"
       alt="Angular Logo"
       src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
@@ -11,7 +11,7 @@
     <span class="text-black">Welcome</span>
   </button>
 
-  <div class="flex gap-4 h-full items-center">
+  <div class="flex h-full items-center gap-6">
     <app-login></app-login>
     <app-register></app-register>
   </div>

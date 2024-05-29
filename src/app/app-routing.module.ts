@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'users-dashboard',
     loadChildren: () =>
       import('./modules/users-dashboard/users-dashboard.module').then(
-        (m) => m.UsersDashboardModule
+        (m) => m.UsersDashboardModule,
       ),
   },
 ];
