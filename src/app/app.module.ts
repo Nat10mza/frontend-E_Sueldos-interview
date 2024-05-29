@@ -5,40 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from './components/login/login.component';
-import { UserCreationComponent } from './components/user-creation/user-creation.component';
-
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTableModule } from '@angular/material/table';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { LoginFormComponent } from './components/login/login-form/login-form.component';
-import { RegisterFormComponent } from './components/register/register-form/register-form.component';
-import { FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { HomeModule } from './modules/home/home.module';
+import { UsersDashboardModule } from './modules/users-dashboard/users-dashboard.module';
+import { NavbarModule } from './modules/navbar/navbar.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RegisterComponent,
-    LoginComponent,
-    UserCreationComponent,
-    LoginFormComponent,
-    RegisterFormComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatTableModule,
-    MatDialogModule,
-    FormsModule,
-    MatInputModule,
-    MatFormFieldModule,
+    HomeModule,
+    NavbarModule,
+    UsersDashboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
