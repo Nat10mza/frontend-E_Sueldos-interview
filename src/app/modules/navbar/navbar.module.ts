@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { LogoutComponent } from './navbar/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CookieService } from 'ngx-cookie-service';
     LoginComponent,
     LoginFormComponent,
     RegisterFormComponent,
+    LogoutComponent,
   ],
   imports: [
     CommonModule,

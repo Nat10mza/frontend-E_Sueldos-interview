@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = 'frontend-E_Sueldos-interview';
+  title = 'E_Sueldos-interview';
 }
