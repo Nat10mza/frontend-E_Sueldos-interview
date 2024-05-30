@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { RegisterLoginService } from 'src/app/core/services/register-login.service';
 
 @Component({
   selector: 'app-register-form',
@@ -14,15 +15,27 @@ export class RegisterFormComponent {
   });
   submitted = false;
 
-  constructor(public dialogRef: MatDialogRef<RegisterFormComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<RegisterFormComponent>,
+    public registerService: RegisterLoginService,
+  ) {}
 
   onSubmit(f: NgForm) {
-    console.log(f.value);
+    const user = {
+      name: f.value.Username,
+      email: f.value.Email,
+      password: f.value.Password,
+    };
+    this.registerService.register(user).subscribe((data) => {
+      console.log(data);
+      this.registerService.setToken(data.token);
+    });
+
     this.submitted = true;
     f.reset();
-    console.log(this.submitted);
+
     this.submitted = false;
-    console.log(this.submitted);
+
     this.dialogRef.close();
   }
 }

@@ -10,6 +10,7 @@ const routes: Routes = [
 
   {
     path: 'users-dashboard',
+    pathMatch: 'full',
     loadChildren: () =>
       import('./modules/users-dashboard/users-dashboard.module').then(
         (m) => m.UsersDashboardModule,

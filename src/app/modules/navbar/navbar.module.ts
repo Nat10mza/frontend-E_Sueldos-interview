@@ -13,6 +13,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
+import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+
 @NgModule({
   declarations: [
     NavbarComponent,
@@ -23,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     MatButtonModule,
     MatDialogModule,
     FormsModule,
@@ -31,5 +35,6 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
   ],
   exports: [NavbarComponent],
+  providers: [CookieService],
 })
 export class NavbarModule {}
