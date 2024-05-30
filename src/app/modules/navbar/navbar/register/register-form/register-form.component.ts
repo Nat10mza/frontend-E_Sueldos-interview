@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { RegisterLoginService } from 'src/app/core/services/register-login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -18,6 +19,7 @@ export class RegisterFormComponent {
   constructor(
     public dialogRef: MatDialogRef<RegisterFormComponent>,
     public registerService: RegisterLoginService,
+    public router: Router,
   ) {}
 
   onSubmit(f: NgForm) {
@@ -30,16 +32,22 @@ export class RegisterFormComponent {
     if (!f.value.Username || !f.value.Email || !f.value.Password)
       return alert('complete the form');
 
-    this.registerService.register(user).subscribe((data) => {
-      console.log(data);
-      this.registerService.setToken(data.tokens);
-    });
+    this.registerService.register(user).subscribe(
+      (data) => {
+        console.log(data);
+        this.registerService.setToken(data.tokens);
+        this.submitted = true;
+        f.reset();
 
-    this.submitted = true;
-    f.reset();
+        this.submitted = false;
 
-    this.submitted = false;
+        this.dialogRef.close();
+        this.router.navigateByUrl('/users-dashboard');
+      },
 
-    this.dialogRef.close();
+      (error) => {
+        console.log(error);
+      },
+    );
   }
 }

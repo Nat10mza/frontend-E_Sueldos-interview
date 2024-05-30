@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { RegisterLoginService } from 'src/app/core/services/register-login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -13,15 +15,33 @@ export class LoginFormComponent {
   });
   submitted = false;
 
-  constructor(public dialogRef: MatDialogRef<LoginFormComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<LoginFormComponent>,
+    public loginService: RegisterLoginService,
+    public router: Router,
+  ) {}
 
   onSubmit(f: NgForm) {
-    console.log(f.value);
-    this.submitted = true;
-    f.reset();
-    console.log(this.submitted);
-    this.submitted = false;
-    console.log(this.submitted);
-    this.dialogRef.close();
+    const user = {
+      email: f.value.Email,
+      password: f.value.Password,
+    };
+
+    if (!f.value.Email || !f.value.Password) return alert('complete the form');
+
+    this.loginService.login(user).subscribe(
+      (data) => {
+        this.loginService.setToken(data.tokens);
+        console.log(data);
+        this.submitted = true;
+        f.reset();
+        this.submitted = false;
+        this.dialogRef.close();
+        this.router.navigateByUrl('/users-dashboard');
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
   }
 }

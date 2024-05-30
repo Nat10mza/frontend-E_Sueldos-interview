@@ -12,9 +12,9 @@ export class RegisterLoginService {
     private cookies: CookieService,
   ) {}
 
-  // login(user: any): Observable<any> {
-  //   return this.http.post('hhttp://localhost:3000/v1/auth/login', user);
-  // }
+  login(user: any): Observable<any> {
+    return this.http.post('http://localhost:3000/v1/auth/login', user);
+  }
 
   register(user: any): Observable<any> {
     return this.http.post('http://localhost:3000/v1/auth/register', user);

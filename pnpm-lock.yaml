@@ -44,6 +44,9 @@ importers:
       rxjs:
         specifier: ~7.8.0
         version: 7.8.1
+      store@15:
+        specifier: link:ngrx/store@15
+        version: link:ngrx/store@15
       tslib:
         specifier: ^2.3.0
         version: 2.6.2
