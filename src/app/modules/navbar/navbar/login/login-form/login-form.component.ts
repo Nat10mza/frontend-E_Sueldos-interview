@@ -33,7 +33,11 @@ export class LoginFormComponent {
 
     this.loginService.login(user).subscribe(
       (data) => {
-        this.loginService.setToken(data.tokens.access.token, data.user.id);
+        this.loginService.setToken(
+          data.tokens.access.token,
+          data.tokens.refresh.token,
+          data.user.id,
+        );
         this.userService.setUser(data.user);
 
         this.submitted = true;

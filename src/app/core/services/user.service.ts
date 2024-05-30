@@ -17,4 +17,8 @@ export class UserService {
   getUser(): User | null {
     return this.userSubject.value;
   }
+
+  logoutUser() {
+    this.userSubject.next(null);
+  }
 }

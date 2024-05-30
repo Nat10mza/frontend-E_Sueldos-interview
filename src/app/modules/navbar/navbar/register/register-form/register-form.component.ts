@@ -37,7 +37,11 @@ export class RegisterFormComponent {
     this.registerService.register(user).subscribe(
       (data) => {
         console.log(data);
-        this.registerService.setToken(data.tokens.access.token, data.user.id);
+        this.registerService.setToken(
+          data.tokens.access.token,
+          data.tokens.refresh.token,
+          data.user.id,
+        );
 
         this.submitted = true;
         f.reset();

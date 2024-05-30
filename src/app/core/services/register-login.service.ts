@@ -21,27 +21,39 @@ export class RegisterLoginService {
   register(user: any): Observable<any> {
     return this.http.post('http://localhost:3000/v1/auth/register', user);
   }
-  setToken(token: string, id: string) {
-    this.cookies.set('token', token);
-    this.cookies.set('id', id);
-  }
-  getToken() {
-    return this.cookies.get('token');
+
+  logout(refreshToken: string) {
+    return this.http.post('http://localhost:3000/v1/auth/logout', {
+      refreshToken: refreshToken,
+    });
   }
 
+  setToken(accessToken: string, refreshToken: string, id: string) {
+    this.cookies.set('access-token', accessToken);
+    this.cookies.set('refresh-token', refreshToken);
+    this.cookies.set('id', id);
+  }
+
+  getAccessToken() {
+    return this.cookies.get('access-token');
+  }
+
+  getRefreshToken() {
+    return this.cookies.get('refresh-token');
+  }
   getId() {
     return this.cookies.get('id');
   }
 
   getUserLogged() {
-    const token = this.getToken();
+    const accessToken = this.getAccessToken();
     const id = this.getId();
 
-    if (token) {
+    if (accessToken) {
       console.log('token service', id);
       return this.http
         .get<User>(`http://localhost:3000/v1/users/${id}`, {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: { Authorization: `Bearer ${accessToken}` },
         })
         .pipe(
           catchError(async (err) => console.log(err)), // Handle error and return null if token is invalid
@@ -49,5 +61,10 @@ export class RegisterLoginService {
     } else {
       return null; // Return null if no token found
     }
+  }
+  deleteCookies() {
+    this.cookies.delete('access-token');
+    this.cookies.delete('refresh-token');
+    this.cookies.delete('id');
   }
 }
