@@ -3,6 +3,7 @@ import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { RegisterLoginService } from 'src/app/core/services/register-login.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-register-form',
@@ -20,6 +21,7 @@ export class RegisterFormComponent {
     public dialogRef: MatDialogRef<RegisterFormComponent>,
     public registerService: RegisterLoginService,
     public router: Router,
+    private userService: UserService,
   ) {}
 
   onSubmit(f: NgForm) {
@@ -35,13 +37,15 @@ export class RegisterFormComponent {
     this.registerService.register(user).subscribe(
       (data) => {
         console.log(data);
-        this.registerService.setToken(data.tokens);
+        this.registerService.setToken(data.tokens.access.token, data.user.id);
+
         this.submitted = true;
         f.reset();
 
         this.submitted = false;
 
         this.dialogRef.close();
+        this.userService.setUser(data.user);
         this.router.navigateByUrl('/users-dashboard');
       },
 
