@@ -3,6 +3,7 @@ import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RegisterLoginService } from 'src/app/core/services/register-login.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-login-form',
@@ -18,6 +19,7 @@ export class LoginFormComponent {
   constructor(
     public dialogRef: MatDialogRef<LoginFormComponent>,
     public loginService: RegisterLoginService,
+    private userService: UserService,
     public router: Router,
   ) {}
 
@@ -33,6 +35,8 @@ export class LoginFormComponent {
       (data) => {
         this.loginService.setToken(data.tokens);
         console.log(data);
+        this.userService.setUser(data.user);
+
         this.submitted = true;
         f.reset();
         this.submitted = false;
@@ -40,6 +44,7 @@ export class LoginFormComponent {
         this.router.navigateByUrl('/users-dashboard');
       },
       (error) => {
+        //TODO error handle
         console.log(error);
       },
     );

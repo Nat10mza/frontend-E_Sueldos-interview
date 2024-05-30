@@ -11,7 +11,9 @@
     <span class="text-black">Welcome</span>
   </button>
 
-  <div class="flex h-full items-center gap-6">
+  <div *ngIf="user$ | async as user">Welcome, {{ user.name }}!</div>
+
+  <div *ngIf="!(user$ | async)" class="flex h-full items-center gap-6">
     <app-login></app-login>
     <app-register></app-register>
   </div>
