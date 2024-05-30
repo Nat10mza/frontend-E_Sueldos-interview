@@ -26,9 +26,13 @@ export class RegisterFormComponent {
       email: f.value.Email,
       password: f.value.Password,
     };
+
+    if (!f.value.Username || !f.value.Email || !f.value.Password)
+      return alert('complete the form');
+
     this.registerService.register(user).subscribe((data) => {
       console.log(data);
-      this.registerService.setToken(data.token);
+      this.registerService.setToken(data.tokens);
     });
 
     this.submitted = true;

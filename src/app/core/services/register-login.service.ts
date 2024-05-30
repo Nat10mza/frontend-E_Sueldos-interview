@@ -19,8 +19,8 @@ export class RegisterLoginService {
   register(user: any): Observable<any> {
     return this.http.post('http://localhost:3000/v1/auth/register', user);
   }
-  setToken(token: string) {
-    this.cookies.set('token', token);
+  setToken(tokens: string) {
+    this.cookies.set('token', tokens);
   }
   getToken() {
     return this.cookies.get('token');
