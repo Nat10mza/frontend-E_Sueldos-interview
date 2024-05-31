@@ -10,6 +10,14 @@
     <mat-form-field class="w-full">
       <input matInput ngModel name="Password" placeholder="Enter password" />
     </mat-form-field>
+    <p class="pb-2 text-sm">
+      if you don't have an acount
+      <a
+        (click)="openRegisterDialog()"
+        class="cursor-pointer underline hover:text-red-700"
+        >Register Here!</a
+      >
+    </p>
     <button mat-raised-button color="primary" class="w-full">
       <mat-icon
         aria-hidden="false"

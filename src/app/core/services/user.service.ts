@@ -19,6 +19,6 @@ export class UserService {
   }
 
   logoutUser() {
-    this.userSubject.next(null);
+    return console.log('Logout ', this.userSubject.next(null));
   }
 }

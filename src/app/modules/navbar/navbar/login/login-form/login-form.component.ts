@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { RegisterLoginService } from 'src/app/core/services/register-login.service';
 import { UserService } from 'src/app/core/services/user.service';
+import { RegisterFormComponent } from '../../register/register-form/register-form.component';
 
 @Component({
   selector: 'app-login-form',
@@ -18,10 +18,15 @@ export class LoginFormComponent {
 
   constructor(
     public dialogRef: MatDialogRef<LoginFormComponent>,
+    public dialogRegister: MatDialog,
     public loginService: RegisterLoginService,
     private userService: UserService,
-    public router: Router,
   ) {}
+
+  openRegisterDialog() {
+    this.dialogRef.close();
+    this.dialogRegister.open(RegisterFormComponent);
+  }
 
   onSubmit(f: NgForm) {
     const user = {
@@ -44,7 +49,6 @@ export class LoginFormComponent {
         f.reset();
         this.submitted = false;
         this.dialogRef.close();
-        this.router.navigateByUrl('/users-dashboard');
       },
       (error) => {
         //TODO error handle

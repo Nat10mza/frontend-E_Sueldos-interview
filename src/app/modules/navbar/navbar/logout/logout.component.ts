@@ -17,11 +17,10 @@ export class LogoutComponent {
   ) {}
   onLogout() {
     this.token = this.logoutService.getRefreshToken();
-    console.log(this.token);
     this.logoutService.logout(this.token).subscribe(() => {
       this.userService.logoutUser();
       this.logoutService.deleteCookies();
-      this.router.navigateByUrl('');
+      // this.router.navigateByUrl('');
     });
   }
 }

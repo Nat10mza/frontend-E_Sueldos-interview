@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { RegisterLoginService } from 'src/app/core/services/register-login.service';
-import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -20,7 +19,6 @@ export class RegisterFormComponent {
   constructor(
     public dialogRef: MatDialogRef<RegisterFormComponent>,
     public registerService: RegisterLoginService,
-    public router: Router,
     private userService: UserService,
   ) {}
 
@@ -50,7 +48,6 @@ export class RegisterFormComponent {
 
         this.dialogRef.close();
         this.userService.setUser(data.user);
-        this.router.navigateByUrl('/users-dashboard');
       },
 
       (error) => {
