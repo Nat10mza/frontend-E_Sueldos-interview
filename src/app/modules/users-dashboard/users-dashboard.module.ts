@@ -7,11 +7,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UserCreationComponent } from './user-creation/user-creation.component';
+import { UsersDashboardComponent } from './users-dashboard/users-dashboard.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [UsersDashboardPageComponent, UserCreationComponent],
+  declarations: [UsersDashboardPageComponent, UsersDashboardComponent],
   imports: [
     CommonModule,
     UsersDashboardRoutingModule,
