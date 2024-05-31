@@ -8,13 +8,14 @@ import { ApiResponse } from 'src/app/models/apiResponse';
   providedIn: 'root',
 })
 export class CrudService {
-  private apiUrl = 'http://localhost:3000/v1/users/';
+  private apiUrl = 'http://localhost:3000/v1/users?limit=50&page=1';
 
   constructor(
     private http: HttpClient,
     private cookies: CookieService,
   ) {}
 
+  // Duplicated code from other service
   getAccessToken() {
     return this.cookies.get('access-token');
   }
