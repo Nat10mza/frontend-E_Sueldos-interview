@@ -1,30 +1,38 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDrawer } from '@angular/material/sidenav';
 
 export interface PeriodicElement {
+  id: number;
   name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  email: string;
+  role: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+  { id: 1, name: 'Hydrogen', email: 'example@example.com', role: 'H' },
+  { id: 2, name: 'Helium', email: 'example@example.com', role: 'He' },
+  { id: 3, name: 'Lithium', email: 'example@example.com', role: 'Li' },
+  { id: 4, name: 'Beryllium', email: 'example@example.com', role: 'Be' },
+  { id: 5, name: 'Boron', email: 'example@example.com', role: 'B' },
+  { id: 6, name: 'Carbon', email: 'example@example.com', role: 'C' },
+  { id: 7, name: 'Nitrogen', email: 'example@example.com', role: 'N' },
+  { id: 8, name: 'Oxygen', email: 'example@example.com', role: 'O' },
+  { id: 9, name: 'Fluorine', email: 'example@example.com', role: 'F' },
+  { id: 10, name: 'Neon', email: 'example@example.com', role: 'Ne' },
 ];
 
 @Component({
   selector: 'app-user-creation',
   templateUrl: './user-creation.component.html',
 })
-export class UserCreationComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+export class UserCreationComponent implements AfterViewInit {
+  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
   dataSource = ELEMENT_DATA;
+  @ViewChild('drawer') drawer!: MatDrawer;
+
+  ngAfterViewInit(): void {
+    if (this.drawer) {
+      this.drawer.toggle();
+    }
+  }
 }

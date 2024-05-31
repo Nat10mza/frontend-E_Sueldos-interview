@@ -8,6 +8,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserCreationComponent } from './user-creation/user-creation.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [UsersDashboardPageComponent, UserCreationComponent],
@@ -18,6 +19,7 @@ import { UserCreationComponent } from './user-creation/user-creation.component';
     MatTableModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
   ],
 })
 export class UsersDashboardModule {}

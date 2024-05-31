@@ -20,7 +20,7 @@ export class LogoutComponent {
     this.logoutService.logout(this.token).subscribe(() => {
       this.userService.logoutUser();
       this.logoutService.deleteCookies();
-      // this.router.navigateByUrl('');
+      this.router.navigateByUrl('');
     });
   }
 }
