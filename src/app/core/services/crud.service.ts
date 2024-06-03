@@ -45,7 +45,7 @@ export class CrudService {
     });
   }
 
-  updateUser(id: number, body: reqBody) {
+  updateUser(id: string, body: reqBody) {
     let update_apiUrl = `${this.apiUrl}/users/${id}`;
     const accessToken = this.getAccessToken();
     return this.http.patch(update_apiUrl, body, {

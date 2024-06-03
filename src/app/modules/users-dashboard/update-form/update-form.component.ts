@@ -17,7 +17,7 @@ export class UpdateFormComponent {
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
-    public data: { id: number; name: string; email: string },
+    public data: { id: string; name: string; email: string },
     public dialogRef: MatDialogRef<UpdateFormComponent>,
     public crudService: CrudService,
   ) {}
@@ -30,7 +30,6 @@ export class UpdateFormComponent {
     };
     if (!f.value.Username) user.name = this.data.name;
     if (!f.value.Email) user.email = this.data.email;
-
 
     if (!f.value.Password) return alert('complete the form');
 

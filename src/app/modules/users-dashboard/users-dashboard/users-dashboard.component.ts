@@ -5,16 +5,17 @@ import { CrudService } from 'src/app/core/services/crud.service';
 import { User } from 'src/app/models/user';
 import { UpdateFormComponent } from '../update-form/update-form.component';
 import { CreateUserFormComponent } from '../create-user-form/create-user-form.component';
+import { UserService } from 'src/app/core/services/user.service';
 
 export interface UsersList {
-  id: number;
+  id: string;
   name: string;
   email: string;
   role: string;
 }
 
 interface reqBody {
-  id: number;
+  id: string;
   name: string;
   email: string;
 }
@@ -25,8 +26,9 @@ interface reqBody {
 })
 export class UsersDashboardComponent implements OnInit, AfterViewInit {
   users: User[] = [];
+  loggedUser: User | null = null;
   user: reqBody = {
-    id: 0,
+    id: '',
     name: '',
     email: '',
   };
@@ -35,6 +37,7 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
 
   constructor(
     private crudService: CrudService,
+    public userService: UserService,
     public dialog: MatDialog,
   ) {}
 
@@ -86,6 +89,11 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
     });
   }
   deleteOnClick(id: string) {
+    this.userService.user$.subscribe((user) => {
+      this.loggedUser = user;
+    });
+    if (this.loggedUser?.id === id) return alert('You cant remove yourself');
+
     this.crudService.deleteUser(id).subscribe();
     this.getUsers();
   }
