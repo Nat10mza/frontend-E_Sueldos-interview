@@ -6,11 +6,11 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RegisterLoginService } from '../services/register-login.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(public authService: RegisterLoginService) {}
+  constructor(public authService: AuthService) {}
 
   intercept(
     request: HttpRequest<unknown>,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { RegisterLoginService } from 'src/app/core/services/register-login.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/models/user';
 import { LoginFormComponent } from '../../navbar/navbar/login/login-form/login-form.component';
@@ -16,7 +16,7 @@ export class HomePageComponent implements OnInit {
   constructor(
     private router: Router,
     public userService: UserService,
-    public getToken: RegisterLoginService,
+    public getToken: AuthService,
     public dialog: MatDialog,
   ) {}
 

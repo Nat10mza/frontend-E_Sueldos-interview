@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { RegisterLoginService } from 'src/app/core/services/register-login.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/core/services/user.service';
 export class LogoutComponent {
   private token: string = '';
   constructor(
-    private logoutService: RegisterLoginService,
+    private logoutService: AuthService,
     public router: Router,
     private userService: UserService,
   ) {}
