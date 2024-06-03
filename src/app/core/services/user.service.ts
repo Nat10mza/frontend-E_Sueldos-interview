@@ -10,8 +10,7 @@ export class UserService {
   user$ = this.userSubject.asObservable();
 
   setUser(user: User): void {
-    this.userSubject.next(user);
-    console.log('Service ', user);
+    return this.userSubject.next(user);
   }
 
   getUser(): User | null {
@@ -19,6 +18,6 @@ export class UserService {
   }
 
   logoutUser() {
-    return console.log('Logout ', this.userSubject.next(null));
+    return this.userSubject.next(null);
   }
 }

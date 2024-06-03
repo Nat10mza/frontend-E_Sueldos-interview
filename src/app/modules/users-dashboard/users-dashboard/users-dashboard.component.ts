@@ -1,7 +1,10 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
 import { CrudService } from 'src/app/core/services/crud.service';
 import { User } from 'src/app/models/user';
+import { UpdateFormComponent } from '../update-form/update-form.component';
+import { CreateUserFormComponent } from '../create-user-form/create-user-form.component';
 
 export interface UsersList {
   id: number;
@@ -10,18 +13,11 @@ export interface UsersList {
   role: string;
 }
 
-let ELEMENT_DATA: UsersList[] = [
-  // { id: 1, name: 'Hydrogen', email: 'example@example.com', role: 'H' },
-  // { id: 2, name: 'Helium', email: 'example@example.com', role: 'He' },
-  // { id: 3, name: 'Lithium', email: 'example@example.com', role: 'Li' },
-  // { id: 4, name: 'Beryllium', email: 'example@example.com', role: 'Be' },
-  // { id: 5, name: 'Boron', email: 'example@example.com', role: 'B' },
-  // { id: 6, name: 'Carbon', email: 'example@example.com', role: 'C' },
-  // { id: 7, name: 'Nitrogen', email: 'example@example.com', role: 'N' },
-  // { id: 8, name: 'Oxygen', email: 'example@example.com', role: 'O' },
-  // { id: 9, name: 'Fluorine', email: 'example@example.com', role: 'F' },
-  // { id: 10, name: 'Neon', email: 'example@example.com', role: 'Ne' },
-];
+interface reqBody {
+  id: number;
+  name: string;
+  email: string;
+}
 
 @Component({
   selector: 'app-user-creation',
@@ -29,13 +25,20 @@ let ELEMENT_DATA: UsersList[] = [
 })
 export class UsersDashboardComponent implements OnInit, AfterViewInit {
   users: User[] = [];
+  user: reqBody = {
+    id: 0,
+    name: '',
+    email: '',
+  };
   displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
   dataSource = this.users;
 
-  constructor(private crudService: CrudService) {}
+  constructor(
+    private crudService: CrudService,
+    public dialog: MatDialog,
+  ) {}
 
-  ngOnInit(): void {
-    // ELEMENT_DATA = this.crudService.getAllUsers();
+  getUsers() {
     this.crudService.getAllUsers().subscribe(
       (data: User[]) => {
         this.users = data;
@@ -48,11 +51,42 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
     );
   }
 
+  ngOnInit(): void {
+    // ELEMENT_DATA = this.crudService.getAllUsers();
+    this.getUsers();
+  }
+
   @ViewChild('drawer') drawer!: MatDrawer;
 
   ngAfterViewInit(): void {
     if (this.drawer) {
       this.drawer.toggle();
     }
+  }
+
+  oneCreateUserDialogOnClick() {
+    const dialogRef = this.dialog.open(CreateUserFormComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getUsers();
+    });
+  }
+
+  openEditDialogOnClick(user: reqBody) {
+    const dialogRef = this.dialog.open(UpdateFormComponent, {
+      data: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+    });
+    console.log('EditedRef', user);
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getUsers();
+    });
+  }
+  deleteOnClick(id: string) {
+    this.crudService.deleteUser(id).subscribe();
+    this.getUsers();
   }
 }

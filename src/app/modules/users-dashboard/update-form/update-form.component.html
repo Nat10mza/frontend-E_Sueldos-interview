@@ -1,0 +1,50 @@
+<div class="max-w-80 p-6">
+  <h2 class="text-xl font-semibold">Edit User</h2>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form pt-4">
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        [(ngModel)]="data.name"
+        name="username"
+        placeholder="Username"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        [(ngModel)]="data.email"
+        name="email"
+        placeholder="Email"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        ngModel
+        required
+        value="Password"
+        name="Password"
+        placeholder="New password"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <aside class="flex w-full justify-end">
+      <button mat-raised-button color="primary" class="h-full">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Edit
+     icon"
+          fontIcon="edit
+    "
+        ></mat-icon>
+
+        Edit
+      </button>
+    </aside>
+  </form>
+</div>

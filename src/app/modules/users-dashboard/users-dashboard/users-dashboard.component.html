@@ -3,7 +3,12 @@
   autosize
 >
   <mat-drawer #drawer class="example-sidenav min-w-40" mode="side">
-    <button mat-button color="primary" class="w-full px-4 py-2">
+    <button
+      mat-button
+      color="primary"
+      (click)="oneCreateUserDialogOnClick()"
+      class="w-full px-4 py-2"
+    >
       Create user
     </button>
     <!-- <button mat-flat-button color="accent" class="my-px w-full px-4 py-2">
@@ -48,14 +53,22 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef><p class="pl-6">Actions</p></th>
           <td mat-cell class="flex gap-2" *matCellDef="let element">
-            <button mat-icon-button color="primary">
+            <button
+              (click)="openEditDialogOnClick(element)"
+              mat-icon-button
+              color="primary"
+            >
               <mat-icon
                 aria-hidden="false"
                 aria-label="Edit icon"
                 fontIcon="edit"
               ></mat-icon>
             </button>
-            <button mat-icon-button color="primary">
+            <button
+              (click)="deleteOnClick(element.id)"
+              mat-icon-button
+              color="primary"
+            >
               <mat-icon
                 aria-hidden="false"
                 aria-label="Delete icon"

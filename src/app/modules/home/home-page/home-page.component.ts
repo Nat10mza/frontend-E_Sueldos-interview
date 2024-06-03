@@ -34,7 +34,6 @@ export class HomePageComponent implements OnInit {
     }
     this.userService.user$.subscribe((user) => {
       this.user = user;
-      console.log('User', user);
     });
   }
 

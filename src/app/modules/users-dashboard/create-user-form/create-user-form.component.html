@@ -1,0 +1,69 @@
+<div class="max-w-80 p-6">
+  <h2 class="text-xl font-semibold">Create User</h2>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form pt-4">
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Username</mat-label>
+      <input
+        matInput
+        ngModel
+        required
+        name="username"
+        placeholder="Enter username"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        ngModel
+        required
+        name="email"
+        placeholder="Enter email"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        ngModel
+        required
+        value="Password"
+        name="password"
+        placeholder="Enter password"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Role</mat-label>
+      <mat-select name="role" #first="ngModel" ngModel>
+        <mat-option *ngFor="let role of roles" [value]="role.value">{{
+          role.viewValue
+        }}</mat-option>
+      </mat-select>
+      <!-- <input
+        matInput
+        ngModel
+        required
+        value="Role"
+        name="role"
+        placeholder="Enter role"
+        #first="ngModel"
+      /> -->
+    </mat-form-field>
+    <aside class="flex w-full justify-end">
+      <button mat-raised-button color="primary" class="h-full">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Create
+     icon"
+          fontIcon="how_to_reg
+    "
+        ></mat-icon>
+
+        Create
+      </button>
+    </aside>
+  </form>
+</div>

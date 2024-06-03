@@ -50,7 +50,6 @@ export class RegisterLoginService {
     const id = this.getId();
 
     if (accessToken) {
-      console.log('token service', id);
       return this.http
         .get<User>(`http://localhost:3000/v1/users/${id}`, {
           headers: { Authorization: `Bearer ${accessToken}` },
