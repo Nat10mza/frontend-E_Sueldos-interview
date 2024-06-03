@@ -56,6 +56,9 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // ELEMENT_DATA = this.crudService.getAllUsers();
     this.getUsers();
+    this.UserStateService.user$.subscribe((user) => {
+      this.loggedUser = user;
+    });
   }
 
   @ViewChild('drawer') drawer!: MatDrawer;
@@ -87,9 +90,6 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
     });
   }
   deleteOnClick(id: string) {
-    this.UserStateService.user$.subscribe((user) => {
-      this.loggedUser = user;
-    });
     if (this.loggedUser?.id === id) return alert('You cant remove yourself');
 
     this.crudService.deleteUser(id).subscribe();
