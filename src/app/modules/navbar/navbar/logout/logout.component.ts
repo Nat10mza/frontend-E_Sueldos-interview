@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserStateService } from 'src/app/core/services/user-state.service';
 
 @Component({
   selector: 'app-logout',
@@ -13,12 +13,12 @@ export class LogoutComponent {
   constructor(
     private logoutService: AuthService,
     public router: Router,
-    private userService: UserService,
+    private UserStateService: UserStateService,
   ) {}
   onLogout() {
     this.token = this.logoutService.getRefreshToken();
     this.logoutService.logout(this.token).subscribe(() => {
-      this.userService.logoutUser();
+      this.UserStateService.logoutUser();
       this.logoutService.deleteCookies();
       this.router.navigateByUrl('');
     });

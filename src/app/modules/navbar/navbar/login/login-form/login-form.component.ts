@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserStateService } from 'src/app/core/services/user-state.service';
 import { RegisterFormComponent } from '../../register/register-form/register-form.component';
 
 @Component({
@@ -20,7 +20,7 @@ export class LoginFormComponent {
     public dialogRef: MatDialogRef<LoginFormComponent>,
     public dialogRegister: MatDialog,
     public loginService: AuthService,
-    private userService: UserService,
+    private UserStateService: UserStateService,
   ) {}
 
   openRegisterDialog() {
@@ -43,7 +43,7 @@ export class LoginFormComponent {
           data.tokens.refresh.token,
           data.user.id,
         );
-        this.userService.setUser(data.user);
+        this.UserStateService.setUser(data.user);
 
         this.submitted = true;
         f.reset();

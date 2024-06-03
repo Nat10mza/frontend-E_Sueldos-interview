@@ -7,7 +7,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from '../services/user.service';
+import { UserStateService } from '../services/user-state.service';
 import { User } from 'src/app/models/user';
 
 @Injectable({
@@ -17,12 +17,12 @@ export class AuthGuard implements CanActivate {
   user: User | null = null;
 
   constructor(
-    private userService: UserService,
+    private UserStateService: UserStateService,
     private router: Router,
   ) {}
 
   canActivate(): boolean {
-    this.userService.user$.subscribe((user) => {
+    this.UserStateService.user$.subscribe((user) => {
       this.user = user;
       console.log('Guard Check User', user);
     });

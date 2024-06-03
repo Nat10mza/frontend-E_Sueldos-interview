@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserStateService } from 'src/app/core/services/user-state.service';
 
 @Component({
   selector: 'app-register-form',
@@ -19,7 +19,7 @@ export class RegisterFormComponent {
   constructor(
     public dialogRef: MatDialogRef<RegisterFormComponent>,
     public registerService: AuthService,
-    private userService: UserService,
+    private UserStateService: UserStateService,
   ) {}
 
   onSubmit(f: NgForm) {
@@ -46,7 +46,7 @@ export class RegisterFormComponent {
         this.submitted = false;
 
         this.dialogRef.close();
-        this.userService.setUser(data.user);
+        this.UserStateService.setUser(data.user);
       },
 
       (error) => {

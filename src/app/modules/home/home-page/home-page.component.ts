@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserStateService } from 'src/app/core/services/user-state.service';
 import { User } from 'src/app/models/user';
 import { LoginFormComponent } from '../../navbar/navbar/login/login-form/login-form.component';
 
@@ -15,7 +15,7 @@ export class HomePageComponent implements OnInit {
   user: User | null = null;
   constructor(
     private router: Router,
-    public userService: UserService,
+    public UserStateService: UserStateService,
     public getToken: AuthService,
     public dialog: MatDialog,
   ) {}
@@ -28,11 +28,11 @@ export class HomePageComponent implements OnInit {
     if (!this.user) {
       this.getToken.getUserLogged()?.subscribe((data) => {
         if (data) {
-          this.userService.setUser(data);
+          this.UserStateService.setUser(data);
         }
       });
     }
-    this.userService.user$.subscribe((user) => {
+    this.UserStateService.user$.subscribe((user) => {
       this.user = user;
     });
   }

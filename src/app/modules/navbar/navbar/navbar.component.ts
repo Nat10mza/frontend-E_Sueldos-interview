@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from 'src/app/core/services/user.service';
+import { UserStateService } from 'src/app/core/services/user-state.service';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -12,9 +12,9 @@ export class NavbarComponent {
   user$: Observable<User | null>;
   constructor(
     private router: Router,
-    private userService: UserService,
+    private UserStateService: UserStateService,
   ) {
-    this.user$ = this.userService.user$;
+    this.user$ = this.UserStateService.user$;
   }
 
   goToHome() {
