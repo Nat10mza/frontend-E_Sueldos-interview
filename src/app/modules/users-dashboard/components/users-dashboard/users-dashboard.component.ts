@@ -92,7 +92,15 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
   deleteOnClick(id: string) {
     if (this.loggedUser?.id === id) return alert('You cant remove yourself');
 
-    this.crudService.deleteUser(id).subscribe();
-    this.getUsers();
+    this.crudService.deleteUser(id).subscribe(
+      (response) => {
+        console.log('User deleted successfully:', response);
+        this.getUsers(); // Llamar a getUsers después de que deleteUser haya terminado
+      },
+      (error) => {
+        console.error('Failed to delete user:', error);
+        alert('Failed to delete user');
+      },
+    );
   }
 }
