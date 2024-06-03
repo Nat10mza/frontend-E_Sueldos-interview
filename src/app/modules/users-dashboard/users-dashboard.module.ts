@@ -7,13 +7,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { UsersDashboardComponent } from './users-dashboard/users-dashboard.component';
+import { UsersDashboardComponent } from './components/users-dashboard/users-dashboard.component';
 import { MatIconModule } from '@angular/material/icon';
-import { UpdateFormComponent } from './update-form/update-form.component';
+import { UpdateFormComponent } from './components/update-form/update-form.component';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
+import { CreateUserFormComponent } from './components/create-user-form/create-user-form.component';
 
 @NgModule({
   declarations: [

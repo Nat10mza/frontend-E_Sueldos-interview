@@ -45,7 +45,6 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
     this.crudService.getAllUsers().subscribe(
       (data: User[]) => {
         this.users = data;
-        console.log('Results api', this.users);
         this.dataSource = this.users;
       },
       (error) => {
@@ -82,7 +81,6 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
         email: user.email,
       },
     });
-    console.log('EditedRef', user);
 
     dialogRef.afterClosed().subscribe(() => {
       this.getUsers();

@@ -36,9 +36,7 @@ export class CreateUserFormComponent {
       password: f.value.password,
       role: f.value.role,
     };
-    console.log('f submit', f.value);
 
-    console.log('User submit', user);
     if (
       !f.value.username ||
       !f.value.email ||
