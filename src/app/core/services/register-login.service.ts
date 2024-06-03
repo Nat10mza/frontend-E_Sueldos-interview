@@ -50,13 +50,9 @@ export class RegisterLoginService {
     const id = this.getId();
 
     if (accessToken) {
-      return this.http
-        .get<User>(`http://localhost:3000/v1/users/${id}`, {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        })
-        .pipe(
-          catchError(async (err) => console.log(err)), // Handle error and return null if token is invalid
-        );
+      return this.http.get<User>(`http://localhost:3000/v1/users/${id}`).pipe(
+        catchError(async (err) => console.log(err)), // Handle error and return null if token is invalid
+      );
     } else {
       return null; // Return null if no token found
     }

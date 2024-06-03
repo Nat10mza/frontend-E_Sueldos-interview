@@ -17,47 +17,27 @@ interface reqBody {
 export class CrudService {
   private apiUrl = 'http://localhost:3000/v1';
 
-  constructor(
-    private http: HttpClient,
-    private cookies: CookieService,
-  ) {}
-
-  // Duplicated code from other service
-  getAccessToken() {
-    return this.cookies.get('access-token');
-  }
+  constructor(private http: HttpClient) {}
 
   getAllUsers() {
     let get_apiUrl = `${this.apiUrl}/users?limit=50&page=1`;
-    const accessToken = this.getAccessToken();
     return this.http
-      .get<ApiResponse>(get_apiUrl, {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
+      .get<ApiResponse>(get_apiUrl)
       .pipe(map((response) => response.results));
   }
 
   createUser(body: reqBody) {
     let create_apiUrl = `${this.apiUrl}/users`;
-    const accessToken = this.getAccessToken();
-    return this.http.post(create_apiUrl, body, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    return this.http.post(create_apiUrl, body);
   }
 
   updateUser(id: string, body: reqBody) {
     let update_apiUrl = `${this.apiUrl}/users/${id}`;
-    const accessToken = this.getAccessToken();
-    return this.http.patch(update_apiUrl, body, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    return this.http.patch(update_apiUrl, body);
   }
 
   deleteUser(id: string) {
     let delete_apiUrl = `${this.apiUrl}/users/${id}`;
-    const accessToken = this.getAccessToken();
-    return this.http.delete(delete_apiUrl, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    return this.http.delete(delete_apiUrl);
   }
 }
