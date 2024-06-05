@@ -18,6 +18,15 @@ const routes: Routes = [
         (m) => m.UsersDashboardModule,
       ),
   },
+  {
+    path: 'products-dashboard',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./modules/products/products.module').then(
+        (m) => m.ProductsModule,
+      ),
+  },
 ];
 
 @NgModule({

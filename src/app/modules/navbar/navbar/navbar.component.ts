@@ -57,4 +57,8 @@ export class NavbarComponent {
     if (!this.user) return this.dialog.open(LoginFormComponent);
     return this.router.navigate(['/users-dashboard']);
   }
+  goToProductsDashboard() {
+    if (!this.user) return this.dialog.open(LoginFormComponent);
+    return this.router.navigate(['/products-dashboard']);
+  }
 }
