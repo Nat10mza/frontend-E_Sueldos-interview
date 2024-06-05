@@ -95,7 +95,7 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
     this.crudService.deleteUser(id).subscribe(
       (response) => {
         console.log('User deleted successfully:', response);
-        this.getUsers(); // Llamar a getUsers después de que deleteUser haya terminado
+        this.getUsers();
       },
       (error) => {
         console.error('Failed to delete user:', error);
