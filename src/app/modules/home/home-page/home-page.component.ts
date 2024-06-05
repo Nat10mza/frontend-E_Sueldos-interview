@@ -11,7 +11,7 @@ import { LoginFormComponent } from '../../navbar/navbar/login/login-form/login-f
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css'],
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent {
   user: User | null = null;
   constructor(
     private router: Router,
@@ -20,25 +20,20 @@ export class HomePageComponent implements OnInit {
     public dialog: MatDialog,
   ) {}
 
-  ngOnInit() {
-    this.getUser();
-  }
+  // ngOnInit() {
+  //   this.getUser();
+  // }
 
-  getUser(): void {
-    if (!this.user) {
-      this.getToken.getUserLogged()?.subscribe((data) => {
-        if (data) {
-          this.UserStateService.setUser(data);
-        }
-      });
-    }
-    this.UserStateService.user$.subscribe((user) => {
-      this.user = user;
-    });
-  }
-
-  goToUsersDashboard() {
-    if (!this.user) return this.dialog.open(LoginFormComponent);
-    return this.router.navigate(['/users-dashboard']);
-  }
+  // getUser(): void {
+  //   if (!this.user) {
+  //     this.getToken.getUserLogged()?.subscribe((data) => {
+  //       if (data) {
+  //         this.UserStateService.setUser(data);
+  //       }
+  //     });
+  //   }
+  //   this.UserStateService.user$.subscribe((user) => {
+  //     this.user = user;
+  //   });
+  // }
 }

@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       console.log('Guard Check User', user);
     });
 
-    if (this.user) {
+    if (this.user?.role === 'admin') {
       return true;
     } else {
       this.router.navigate(['']);

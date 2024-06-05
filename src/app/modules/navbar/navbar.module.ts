@@ -13,9 +13,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
+import { MatListModule } from '@angular/material/list';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { LogoutComponent } from './navbar/logout/logout.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -35,6 +40,9 @@ import { LogoutComponent } from './navbar/logout/logout.component';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
   ],
   exports: [NavbarComponent],
   providers: [CookieService],
