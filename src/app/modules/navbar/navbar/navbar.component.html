@@ -43,7 +43,7 @@
       <div
         class="submenu"
         [ngClass]="{ expanded: showSubmenu }"
-        *ngIf="isShowing || isExpanded"
+        *ngIf="isShowing || (isExpanded && user?.role === 'admin')"
       >
         <a mat-list-item (click)="goToUsersDashboard()" class="px-4">
           <div class="flex items-center gap-4 pr-2 text-white">
