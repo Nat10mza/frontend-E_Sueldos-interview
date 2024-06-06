@@ -13,12 +13,14 @@
     </mat-toolbar>
     <mat-nav-list class="content-between">
       <mat-list-item>
-        <div
-          class="full-width flex items-center gap-2 text-white"
-          *ngIf="isExpanded || isShowing"
-        >
-          <mat-icon>local_mall</mat-icon>
-          <span class="text-sm"> Products List </span>
+        <div *ngIf="isExpanded || isShowing">
+          <a
+            class="full-width flex items-center gap-2 text-white"
+            (click)="goToProductsList()"
+          >
+            <mat-icon>local_mall</mat-icon>
+            <span class="text-sm"> Products List </span>
+          </a>
         </div>
       </mat-list-item>
       <mat-list-item
@@ -27,7 +29,7 @@
         class="parent"
       >
         <div
-          class="full-width animate-slide-in-left flex items-center gap-2 text-white"
+          class="full-width flex animate-slide-in-left items-center gap-2 text-white"
           *ngIf="isExpanded || isShowing"
         >
           <mat-icon>shield_person</mat-icon>
@@ -57,7 +59,7 @@
             <span class="text-sm" class="text-white">Products</span>
           </div>
         </a>
-        <a mat-list-item (click)="goToUsersDashboard()" class="px-4">
+        <a mat-list-item (click)="goToStockDashboard()" class="px-4">
           <div class="flex items-center gap-4 pr-2 text-white">
             <mat-icon>inventory_2</mat-icon>
             <span class="text-sm" class="text-white">Stock</span>
@@ -70,7 +72,7 @@
   <section class="px-4 pb-4">
     <div
       *ngIf="user$ | async as user"
-      class="animate-slide-in-elliptic-bottom-fwd mt-4 grid items-center gap-2"
+      class="mt-4 grid animate-slide-in-elliptic-bottom-fwd items-center gap-2"
     >
       <div class="flex items-center gap-2 text-[#F44336]">
         <mat-icon
@@ -85,7 +87,7 @@
 
     <div
       *ngIf="!(user$ | async)"
-      class="animate-slide-in-elliptic-bottom-fwd mt-4 grid items-center gap-2"
+      class="mt-4 grid animate-slide-in-elliptic-bottom-fwd items-center gap-2"
     >
       <app-login></app-login>
       <app-register></app-register>

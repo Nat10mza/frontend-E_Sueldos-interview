@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HomeModule } from './modules/home/home.module';
-import { UsersDashboardModule } from './modules/users-dashboard/users-dashboard.module';
+import { UsersDashboardModule } from './modules/admin/users-dashboard/users-dashboard.module';
 import { NavbarModule } from './modules/navbar/navbar.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';

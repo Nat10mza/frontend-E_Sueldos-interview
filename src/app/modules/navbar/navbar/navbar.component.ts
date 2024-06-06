@@ -61,4 +61,12 @@ export class NavbarComponent {
     if (!this.user) return this.dialog.open(LoginFormComponent);
     return this.router.navigate(['/products-dashboard']);
   }
+  goToStockDashboard() {
+    if (!this.user) return this.dialog.open(LoginFormComponent);
+    return this.router.navigate(['/stock-dashboard']);
+  }
+  goToProductsList() {
+    if (!this.user) return this.dialog.open(LoginFormComponent);
+    return this.router.navigate(['/products']);
+  }
 }
