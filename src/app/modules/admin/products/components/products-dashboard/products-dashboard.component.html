@@ -53,14 +53,22 @@
           <ng-container matColumnDef="description">
             <th mat-header-cell *matHeaderCellDef>Description</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.description }}
+              {{
+                element.description.length > 30
+                  ? element.description.substring(0, 30) + "..."
+                  : element.description
+              }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="image">
             <th mat-header-cell *matHeaderCellDef>Image</th>
             <td mat-cell *matCellDef="let element">
-              {{ element.image }}
+              {{
+                element.image.length > 25
+                  ? element.image.substring(0, 25) + "..."
+                  : element.image
+              }}
             </td>
           </ng-container>
 

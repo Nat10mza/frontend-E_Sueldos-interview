@@ -25,12 +25,24 @@ module.exports = {
             opacity: "1",
           },
         },
+
+        "drop-2-top": {
+          "0%": {
+            transform: "translateZ(0) translateY(0)",
+          },
+
+          "100%": {
+            transform: "translateZ(40px) translateY(8px)",
+          },
+        },
       },
       animation: {
         "slide-in-left":
           "slide-in-left 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
         "slide-in-fwd-center":
           "slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+        "drop-2-top":
+          "drop-2-top 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
       },
     },
   },
