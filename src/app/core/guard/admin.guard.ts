@@ -13,7 +13,7 @@ import { User } from 'src/app/models/user';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   user: User | null = null;
 
   constructor(
@@ -27,7 +27,7 @@ export class AuthGuard implements CanActivate {
       console.log('Guard Check User', user);
     });
 
-    if (this.user) {
+    if (this.user?.role === 'admin') {
       return true;
     } else {
       this.router.navigate(['']);

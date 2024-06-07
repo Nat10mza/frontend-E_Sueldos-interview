@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './modules/home/home-page/home-page.component';
 import { AuthGuard } from './core/guard/auth.guard';
+import { AdminGuard } from './core/guard/admin.guard';
 
 const routes: Routes = [
   // Rutas sin guardian
@@ -12,8 +13,17 @@ const routes: Routes = [
 
   // Rutas con guardian
   {
-    path: '',
+    path: 'products',
     canActivate: [AuthGuard],
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./modules/products/products.module').then(
+        (m) => m.ProductsModule,
+      ),
+  },
+  {
+    path: '',
+    canActivate: [AdminGuard],
     children: [
       {
         path: 'users-dashboard',
@@ -37,14 +47,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./modules/admin/stock/stock.module').then(
             (m) => m.StockModule,
-          ),
-      },
-      {
-        path: 'products',
-        pathMatch: 'full',
-        loadChildren: () =>
-          import('./modules/products/products.module').then(
-            (m) => m.ProductsModule,
           ),
       },
     ],

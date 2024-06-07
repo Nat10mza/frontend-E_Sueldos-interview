@@ -15,23 +15,22 @@ module.exports = {
           },
         },
 
-        "slide-in-elliptic-bottom-fwd": {
+        "slide-in-fwd-center": {
           "0%": {
-            transform: "translateY(600px) rotateX(30deg) scale(0)",
-            transformOrigin: "50% 100%",
+            transform: "translateZ(-1400px)",
             opacity: "0",
           },
           "100%": {
-            transform: "translateY(0) rotateX(0) scale(1)",
-            transformOrigin: "50% -1400px",
+            transform: "translateZ(0)",
             opacity: "1",
           },
         },
       },
       animation: {
-        "slide-in-left": "slide-in-left 0.3s ease-in-out forwards",
-        "slide-in-elliptic-bottom-fwd":
-          "slide-in-elliptic-bottom-fwd 1s ease-out forwards",
+        "slide-in-left":
+          "slide-in-left 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
+        "slide-in-fwd-center":
+          "slide-in-fwd-center 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
       },
     },
   },
