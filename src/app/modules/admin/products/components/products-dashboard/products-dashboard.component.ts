@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/models/product';
+import { CreateProductFormComponent } from '../create-product-form/create-product-form.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-products-dashboard',
@@ -17,12 +19,14 @@ export class ProductsDashboardComponent implements OnInit {
   ];
   dataSource: Product[] = [];
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.getProducts();
   }
-
   getProducts() {
     this.productService.getAllProducts().subscribe(
       (data: Product[]) => {
@@ -34,5 +38,11 @@ export class ProductsDashboardComponent implements OnInit {
         alert(error.message);
       },
     );
+  }
+  onCreateProductDialogOnClick() {
+    const dialogRef = this.dialog.open(CreateProductFormComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getProducts();
+    });
   }
 }

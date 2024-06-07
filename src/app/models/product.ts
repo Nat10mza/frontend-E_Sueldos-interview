@@ -6,3 +6,11 @@ export interface Product {
   price: number;
   id: string;
 }
+
+export interface createdProduct {
+  name: string;
+  description: string;
+  image: string;
+  user: string;
+  price: number;
+}
