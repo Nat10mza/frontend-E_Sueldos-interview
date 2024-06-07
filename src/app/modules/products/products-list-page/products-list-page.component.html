@@ -3,9 +3,12 @@
 >
   <mat-card
     *ngFor="let product of products"
-    class="hover:animate-drop-2-top duration-400 flex w-64 content-between justify-between transition-transform"
+    class="hover:animate-drop-2-top duration-400 w-64 transition-transform"
   >
-    <a (click)="checkButton()" class="relative z-0 cursor-pointer">
+    <a
+      (click)="checkButton()"
+      class="relative z-0 grid h-full cursor-pointer content-between justify-between"
+    >
       <img mat-card-image class="" [src]="product.image" [alt]="product.name" />
       <div class="px-4 pb-4 pt-0">
         <mat-card-content>
