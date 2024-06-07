@@ -3,14 +3,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './modules/home/home-page/home-page.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { AdminGuard } from './core/guard/admin.guard';
+import { NotAuthorizedPageComponent } from './modules/home/not-authorized-page/not-authorized-page.component';
 
-const routes: Routes = [
+const NoAuthGuardRoutes: Routes = [
   // Rutas sin guardian
   {
     path: '',
     component: HomePageComponent,
   },
+  {
+    path: 'not-authorized',
+    component: NotAuthorizedPageComponent,
+  },
+];
 
+const AuthGuardRoutes: Routes = [
   // Rutas con guardian
   {
     path: 'products',
@@ -21,6 +28,7 @@ const routes: Routes = [
         (m) => m.ProductsModule,
       ),
   },
+  // Rutas con admin guardian
   {
     path: '',
     canActivate: [AdminGuard],
@@ -55,6 +63,9 @@ const routes: Routes = [
   // Redirección por defecto
   { path: '**', redirectTo: '' },
 ];
+
+const routes = NoAuthGuardRoutes.concat(AuthGuardRoutes);
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
