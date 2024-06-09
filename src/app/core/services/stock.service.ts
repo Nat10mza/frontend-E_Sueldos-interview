@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { createdProduct } from 'src/app/models/product';
-import { ProductWithStock } from 'src/app/models/stock';
+import { ProductWithStock, createdStock } from 'src/app/models/stock';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +16,8 @@ export class StockService {
   }
   createStock(body: createdProduct) {
     return this.http.post(this.apiUrl, body);
+  }
+  updateStock(id: string | undefined, body: createdStock) {
+    return this.http.patch(`${this.apiUrl}/${id}`, body);
   }
 }

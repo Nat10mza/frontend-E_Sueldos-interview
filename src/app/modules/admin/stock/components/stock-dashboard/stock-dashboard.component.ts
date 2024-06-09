@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/core/services/product.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StockService } from 'src/app/core/services/stock.service';
-import { ProductID_Name } from 'src/app/models/product';
-import { ProductWithStock, Stock } from 'src/app/models/stock';
+import { ProductWithStock } from 'src/app/models/stock';
 
 @Component({
   selector: 'app-stock-dashboard',
@@ -10,16 +9,19 @@ import { ProductWithStock, Stock } from 'src/app/models/stock';
 })
 export class StockDashboardComponent implements OnInit {
   products: ProductWithStock[] = [];
-  selectedProduct: ProductWithStock = {
-    name: '',
-    description: '',
-    image: '',
-    user: '',
-    price: 0,
-    id: '',
-  };
+  selectedProduct: ProductWithStock | undefined;
 
-  constructor(private stockService: StockService) {}
+  form: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private stockService: StockService,
+  ) {
+    this.form = this.formBuilder.group({
+      product: ['', Validators.required],
+      quantity: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.getStocks();
@@ -37,7 +39,32 @@ export class StockDashboardComponent implements OnInit {
     );
   }
 
-  onSelectProduct(product: any): void {
+  onSubmit() {
+    if (this.form.invalid) {
+      alert('invalid form');
+      return;
+    }
+
+    const productId = this.form.value.product.stocks._id;
+    const quantity = this.form.value;
+
+    console.log(productId, quantity);
+
+    this.stockService.updateStock(productId, quantity).subscribe(
+      (response) => {
+        alert('Updated Stock');
+        console.log(response);
+        this.form.reset();
+        this.getStocks;
+      },
+      (error) => {
+        alert('Failed to update stock');
+        console.log(error);
+      },
+    );
+  }
+
+  onSelectProduct(product: ProductWithStock) {
     this.selectedProduct = product;
   }
 }
