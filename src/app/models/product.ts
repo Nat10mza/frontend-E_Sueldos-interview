@@ -14,3 +14,9 @@ export interface createdProduct {
   user: string;
   price: number;
 }
+
+export interface ProductID_Name {
+  name: string;
+  id: string;
+  stock?: number;
+}

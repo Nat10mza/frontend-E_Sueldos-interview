@@ -13,6 +13,10 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiUrl);
   }
 
+  getProductsNameAndID() {
+    return this.http.get<Product[]>(`${this.apiUrl}/IdName`);
+  }
+
   createProduct(body: createdProduct) {
     return this.http.post(this.apiUrl, body);
   }
