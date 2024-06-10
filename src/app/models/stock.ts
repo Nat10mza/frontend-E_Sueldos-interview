@@ -2,11 +2,12 @@ export interface Stock {
   quantity: number;
   product: string;
   id: string;
+  _id?: string;
 }
 
 export interface createdStock {
   quantity: number;
-  product: string;
+  product?: string;
 }
 
 export interface ProductWithStock {

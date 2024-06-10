@@ -1,3 +1,5 @@
+import { Stock } from './stock';
+
 export interface Product {
   name: string;
   description: string;
@@ -5,6 +7,8 @@ export interface Product {
   user: string;
   price: number;
   id: string;
+  _id?: string;
+  stocks?: Stock;
 }
 
 export interface createdProduct {
