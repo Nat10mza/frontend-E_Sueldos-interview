@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { CrudService } from 'src/app/core/services/crud.service';
 
 interface Role {
@@ -27,6 +28,7 @@ export class CreateUserFormComponent {
   constructor(
     public dialogRef: MatDialogRef<CreateUserFormComponent>,
     public crudService: CrudService,
+    private toastr: ToastrService,
   ) {}
 
   onSubmit(f: NgForm) {
@@ -42,18 +44,20 @@ export class CreateUserFormComponent {
       !f.value.email ||
       !f.value.password ||
       !f.value.role
-    )
-      return alert('complete the form');
+    ) {
+      this.toastr.info('Complete the form');
+      return;
+    }
 
     this.crudService.createUser(user).subscribe(
       (response) => {
-        alert('Usuario actualizado');
-        console.log(response);
+        this.toastr.success('Usuario actualizado', 'Exito!');
+
         f.reset();
         this.dialogRef.close();
       },
       (error) => {
-        alert('Mala actualización');
+        this.toastr.error('Mala actualización', 'Oops!');
         console.log(error);
       },
     );

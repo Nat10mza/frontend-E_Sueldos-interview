@@ -3,6 +3,7 @@ import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/models/product';
 import { CreateProductFormComponent } from '../create-product-form/create-product-form.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-products-dashboard',
@@ -22,6 +23,7 @@ export class ProductsDashboardComponent implements OnInit {
   constructor(
     private productService: ProductService,
     public dialog: MatDialog,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class ProductsDashboardComponent implements OnInit {
       },
       (error) => {
         console.log(error);
-        alert(error.message);
+        this.toastr.error(error.message, 'Oops!');
       },
     );
   }

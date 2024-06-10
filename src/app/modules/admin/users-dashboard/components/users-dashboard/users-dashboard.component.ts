@@ -6,6 +6,7 @@ import { User } from 'src/app/models/user';
 import { UpdateFormComponent } from '../update-form/update-form.component';
 import { CreateUserFormComponent } from '../create-user-form/create-user-form.component';
 import { UserStateService } from 'src/app/core/services/user-state.service';
+import { ToastrService } from 'ngx-toastr';
 
 export interface UsersList {
   id: string;
@@ -39,6 +40,7 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
     private crudService: CrudService,
     public UserStateService: UserStateService,
     public dialog: MatDialog,
+    private toastr: ToastrService,
   ) {}
 
   getUsers() {
@@ -90,16 +92,19 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
     });
   }
   deleteOnClick(id: string) {
-    if (this.loggedUser?.id === id) return alert('You cant remove yourself');
+    if (this.loggedUser?.id === id) {
+      this.toastr.warning('You cant remove yourself');
+      return;
+    }
 
     this.crudService.deleteUser(id).subscribe(
       (response) => {
-        console.log('User deleted successfully:', response);
+        this.toastr.info('El usuario se elimino con éxito', 'Info');
         this.getUsers();
       },
       (error) => {
-        console.error('Failed to delete user:', error);
-        alert('Failed to delete user');
+        this.toastr.error('Error al eliminar usuario', 'Oops!');
+        console.error(error);
       },
     );
   }

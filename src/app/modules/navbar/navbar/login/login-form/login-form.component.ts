@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserStateService } from 'src/app/core/services/user-state.service';
 import { RegisterFormComponent } from '../../register/register-form/register-form.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-form',
@@ -21,6 +22,7 @@ export class LoginFormComponent {
     public dialogRegister: MatDialog,
     public loginService: AuthService,
     private UserStateService: UserStateService,
+    private toastr: ToastrService,
   ) {}
 
   openRegisterDialog() {
@@ -34,7 +36,10 @@ export class LoginFormComponent {
       password: f.value.Password,
     };
 
-    if (!f.value.Email || !f.value.Password) return alert('complete the form');
+    if (!f.value.Email || !f.value.Password) {
+      this.toastr.info('Complete the form.');
+      return;
+    }
 
     this.loginService.login(user).subscribe(
       (data) => {
@@ -49,9 +54,11 @@ export class LoginFormComponent {
         f.reset();
         this.submitted = false;
         this.dialogRef.close();
+        this.toastr.success('Bienvenido!', 'Exito!');
       },
       (error) => {
         //TODO error handle
+        this.toastr.error('Error en el login', 'Oops!');
         console.log(error);
       },
     );

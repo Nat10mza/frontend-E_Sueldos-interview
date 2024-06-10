@@ -1,6 +1,7 @@
 import { Component, Inject, Input } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { CrudService } from 'src/app/core/services/crud.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class UpdateFormComponent {
     public data: { id: string; name: string; email: string },
     public dialogRef: MatDialogRef<UpdateFormComponent>,
     public crudService: CrudService,
+    private toastr: ToastrService,
   ) {}
 
   onSubmit(f: NgForm) {
@@ -31,17 +33,19 @@ export class UpdateFormComponent {
     if (!f.value.Username) user.name = this.data.name;
     if (!f.value.Email) user.email = this.data.email;
 
-    if (!f.value.Password) return alert('complete the form');
+    if (!f.value.Password) {
+      this.toastr.info('Complete the form.');
+      return;
+    }
 
     this.crudService.updateUser(this.data.id, user).subscribe(
       (response) => {
-        alert('Usuario actualizado');
-        console.log(response);
+        this.toastr.success('Usuario actualizado', 'Exito!');
         f.reset();
         this.dialogRef.close();
       },
       (error) => {
-        alert('Mala actualización');
+        this.toastr.error('Mala actualización', 'Oops!');
         console.log(error);
       },
     );
