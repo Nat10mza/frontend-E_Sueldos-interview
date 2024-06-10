@@ -1,0 +1,64 @@
+<div class="max-w-80 p-6">
+  <h2 class="text-xl font-semibold">Create Product</h2>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form pt-4">
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Product name</mat-label>
+      <input
+        matInput
+        ngModel
+        required
+        name="name"
+        placeholder="Enter product name"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        ngModel
+        required
+        name="price"
+        placeholder="Enter price"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        ngModel
+        required
+        value="Description"
+        name="description"
+        placeholder="Enter description"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Image</mat-label>
+      <input
+        matInput
+        ngModel
+        required
+        value="Image"
+        name="image"
+        placeholder="Enter image"
+        #first="ngModel"
+      />
+    </mat-form-field>
+    <aside class="flex w-full justify-end">
+      <button mat-raised-button color="primary" class="h-full">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Create
+     icon"
+          fontIcon="how_to_reg
+    "
+        ></mat-icon>
+
+        Create
+      </button>
+    </aside>
+  </form>
+</div>

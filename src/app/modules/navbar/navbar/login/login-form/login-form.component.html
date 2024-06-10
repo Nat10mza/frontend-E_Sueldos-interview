@@ -1,0 +1,30 @@
+<div class="flex min-w-80 flex-col p-6">
+  <h2 class="text-center text-xl font-semibold">Login</h2>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form pt-4">
+    <p class="">Email</p>
+    <mat-form-field class="w-full">
+      <input matInput ngModel name="Email" placeholder="Enter email" />
+    </mat-form-field>
+
+    <p class="">Password</p>
+    <mat-form-field class="w-full">
+      <input matInput ngModel name="Password" placeholder="Enter password" />
+    </mat-form-field>
+    <p class="pb-2 text-sm">
+      if you don't have an acount
+      <a
+        (click)="openRegisterDialog()"
+        class="cursor-pointer underline hover:text-red-700"
+        >Register Here!</a
+      >
+    </p>
+    <button mat-raised-button color="primary" class="w-full">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Login icon"
+        fontIcon="login"
+      ></mat-icon>
+      Login
+    </button>
+  </form>
+</div>

@@ -1,0 +1,11 @@
+<main class="flex w-full animate-slide-in-fwd-center gap-24 p-4">
+  <aside class="w-1/2">
+    <img class="w-full rounded" [src]="product?.image" [alt]="product?.name" />
+  </aside>
+  <section class="flex w-1/3 flex-col gap-4">
+    <p class="text-6xl">{{ product?.name }}</p>
+    <p class="text-xl">${{ product?.price }} ARS</p>
+    <button mat-flat-button color="primary" class="w-full">Buy</button>
+    <p>{{ product?.description }}</p>
+  </section>
+</main>

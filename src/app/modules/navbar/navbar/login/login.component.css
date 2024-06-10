@@ -1,0 +1,16 @@
+.login-container button,
+.login-container a {
+  margin-right: 8px;
+}
+
+.example-disabled {
+  display: inline-block;
+}
+
+.button-rounded {
+  &.mat-button,
+  &.mat-raised-button,
+  &.mat-flat-button {
+    border-radius: 25% / 50%;
+  }
+}

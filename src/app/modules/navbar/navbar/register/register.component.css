@@ -1,0 +1,7 @@
+.button-rounded {
+  &.mat-button,
+  &.mat-raised-button,
+  &.mat-flat-button {
+    border-radius: 25% / 50%;
+  }
+}

@@ -1,0 +1,39 @@
+<section
+  class="animate-slide-in-fwd-center rounded-2xl border border-opacity-95 p-6"
+>
+  <h2 class="pb-4 text-center text-2xl">Manage products stock</h2>
+  <div class="flex w-full flex-col items-center gap-2">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form pt-4">
+      <mat-form-field class="w-full">
+        <mat-label>Select Product</mat-label>
+        <mat-select
+          formControlName="product"
+          (selectionChange)="onSelectProduct($event.value)"
+        >
+          <mat-option *ngFor="let product of products" [value]="product">
+            {{ product.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always" class="w-full">
+        <mat-label>Quantity</mat-label>
+        <input
+          matInput
+          formControlName="quantity"
+          type="number"
+          class="example-right-align"
+          placeholder="0"
+          value="{{ selectedProduct?.stocks?.quantity }}"
+        />
+      </mat-form-field>
+      <button
+        mat-flat-button
+        color="primary"
+        class="mb-6 flex w-full p-3"
+        type="submit"
+      >
+        Submit stock
+      </button>
+    </form>
+  </div>
+</section>

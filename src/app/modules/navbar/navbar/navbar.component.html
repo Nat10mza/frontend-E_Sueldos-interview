@@ -1,0 +1,96 @@
+<aside class="grid h-screen max-h-screen content-between">
+  <section>
+    <mat-toolbar color="primary" class="example-toolbar">
+      <button (click)="goToHome()" class="group flex items-center gap-2">
+        <img
+          class="transition group-hover:scale-110"
+          width="40"
+          alt="Angular Logo"
+          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
+        />
+        <h1 class="text-white">E-Sueldos Interview</h1>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list class="content-between">
+      <mat-list-item>
+        <div *ngIf="isExpanded || isShowing">
+          <a
+            class="full-width flex items-center gap-2 text-white"
+            (click)="goToProductsList()"
+          >
+            <mat-icon>local_mall</mat-icon>
+            <span class="text-sm"> Products List </span>
+          </a>
+        </div>
+      </mat-list-item>
+      <mat-list-item
+        (click)="showSubmenu = !showSubmenu"
+        *ngIf="user?.role === 'admin'"
+        class="parent"
+      >
+        <div
+          class="full-width flex animate-slide-in-left items-center gap-2 text-white"
+          *ngIf="isExpanded || isShowing"
+        >
+          <mat-icon>shield_person</mat-icon>
+          <span class="text-sm"> Admin Dashboard </span>
+          <mat-icon
+            class="menu-button absolute right-4"
+            [ngClass]="{ rotated: showSubmenu }"
+            *ngIf="isExpanded || isShowing"
+            >expand_more</mat-icon
+          >
+        </div>
+      </mat-list-item>
+      <div
+        class="submenu"
+        [ngClass]="{ expanded: showSubmenu }"
+        *ngIf="isShowing || (isExpanded && user?.role === 'admin')"
+      >
+        <a mat-list-item (click)="goToUsersDashboard()" class="px-4">
+          <div class="flex items-center gap-4 pr-2 text-white">
+            <mat-icon>person</mat-icon>
+            <span class="text-sm" class="text-white">Users</span>
+          </div>
+        </a>
+        <a mat-list-item (click)="goToProductsDashboard()" class="px-4">
+          <div class="flex items-center gap-4 pr-2 text-white">
+            <mat-icon>inventory</mat-icon>
+            <span class="text-sm" class="text-white">Products</span>
+          </div>
+        </a>
+        <a mat-list-item (click)="goToStockDashboard()" class="px-4">
+          <div class="flex items-center gap-4 pr-2 text-white">
+            <mat-icon>inventory_2</mat-icon>
+            <span class="text-sm" class="text-white">Stock</span>
+          </div>
+        </a>
+      </div>
+    </mat-nav-list>
+  </section>
+
+  <section class="px-4 pb-4">
+    <div
+      *ngIf="user$ | async as user"
+      class="animate-slide-in-fwd-center mt-4 grid items-center gap-2"
+    >
+      <div class="flex items-center gap-2 text-[#F44336]">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="account_circle icon"
+          fontIcon="account_circle"
+        ></mat-icon>
+        <p class="text-white">Welcome, {{ user.name }}</p>
+      </div>
+      <app-logout></app-logout>
+    </div>
+
+    <div
+      *ngIf="!(user$ | async)"
+      class="animate-slide-in-fwd-center mt-4 grid items-center gap-2"
+    >
+      <app-login></app-login>
+      <app-register></app-register>
+    </div>
+  </section>
+</aside>

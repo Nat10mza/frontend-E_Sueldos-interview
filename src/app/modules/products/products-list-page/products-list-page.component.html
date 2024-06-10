@@ -1,0 +1,57 @@
+<section
+  class="flex w-full animate-slide-in-fwd-center flex-wrap justify-center gap-8"
+>
+  <mat-card
+    *ngFor="let product of products"
+    class="duration-400 w-64 transition-transform hover:animate-drop-2-top"
+  >
+    <a
+      [routerLink]="['/products/detail', product._id]"
+      [state]="{ product: product }"
+      class="relative z-0 grid h-full cursor-pointer content-between justify-between"
+    >
+      <img
+        mat-card-image
+        class="rounded px-4 pt-4"
+        [src]="product.image"
+        [alt]="product.name"
+      />
+      <div class="px-4 pb-4 pt-0">
+        <mat-card-content>
+          <div class="grid w-full gap-2">
+            <div class="flex w-full items-center justify-between">
+              <p class="text-left text-lg font-medium">{{ product.name }}</p>
+              <p class="text-right text-2xl text-gray-700">
+                ${{ product.price }}
+              </p>
+            </div>
+            <p
+              *ngIf="!product.stocks?.quantity"
+              class="text-center text-sm text-gray-700"
+            >
+              Not Available
+            </p>
+            <p
+              *ngIf="product.stocks?.quantity"
+              class="text-center text-sm text-gray-700"
+            >
+              Available: {{ product.stocks?.quantity }}
+            </p>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="flex w-full justify-center">
+            <button
+              mat-raised-button
+              color="primary"
+              class="duration-400 absolute z-50 w-full transition-transform hover:-translate-y-0.5 hover:transition"
+              (click)="buyProduct(product); $event.stopPropagation()"
+            >
+              BUY
+            </button>
+          </div>
+        </mat-card-actions>
+      </div>
+    </a>
+  </mat-card>
+</section>
