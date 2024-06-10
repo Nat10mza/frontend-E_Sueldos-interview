@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ProductService } from 'src/app/core/services/product.service';
 import { Product } from 'src/app/models/product';
 
 @Component({
@@ -9,11 +10,26 @@ import { Product } from 'src/app/models/product';
 export class DetailPageComponent implements OnInit {
   product: Product | undefined;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+  ) {}
 
   ngOnInit(): void {
-    // Recuperar el producto del estado de la ruta
-    this.product = history.state.product;
-    console.log(this.product);
+    // Obtener el ID del producto de los parámetros de la ruta
+    const expectedId = this.route.snapshot.paramMap.get('id');
+
+    // Llamar al servicio ProductService para obtener el producto por su ID
+    if (expectedId) {
+      this.productService.getProductID(expectedId).subscribe(
+        (product: Product) => {
+          this.product = product;
+          console.log(this.product);
+        },
+        (error) => {
+          console.error('Error al recuperar el producto:', error);
+        },
+      );
+    }
   }
 }

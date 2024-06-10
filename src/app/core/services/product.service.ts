@@ -13,8 +13,8 @@ export class ProductService {
     return this.http.get<Product[]>(this.apiUrl);
   }
 
-  getProductsNameAndID() {
-    return this.http.get<Product[]>(`${this.apiUrl}/IdName`);
+  getProductID(id: string) {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 
   createProduct(body: createdProduct) {
