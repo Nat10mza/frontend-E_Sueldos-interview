@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { StockService } from 'src/app/core/services/stock.service';
 import { ProductWithStock } from 'src/app/models/stock';
 
@@ -16,6 +17,7 @@ export class StockDashboardComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private stockService: StockService,
+    private router: Router,
   ) {
     this.form = this.formBuilder.group({
       product: ['', Validators.required],
@@ -39,32 +41,64 @@ export class StockDashboardComponent implements OnInit {
     );
   }
 
+  onSelectProduct(product: ProductWithStock) {
+    this.selectedProduct = product;
+  }
+
+  refreshPage() {
+    window.location.reload();
+  }
+
   onSubmit() {
     if (this.form.invalid) {
-      alert('invalid form');
+      alert('Formulario inválido');
       return;
     }
 
-    const productId = this.form.value.product.stocks._id;
-    const quantity = this.form.value;
+    const formValue = this.form.value;
+    const product = formValue.product;
 
-    console.log(productId, quantity);
+    if (!product) {
+      alert('Producto no seleccionado');
+      return;
+    }
 
-    this.stockService.updateStock(productId, quantity).subscribe(
+    const stocks = product.stocks;
+
+    if (!stocks) {
+      this.stockService.createStock(formValue).subscribe(
+        (response) => {
+          alert('Stock creado');
+          console.log('Response:', response);
+          this.form.reset();
+          this.refreshPage();
+        },
+        (error) => {
+          alert('Falló la creación del stock');
+          console.log(error);
+        },
+      );
+      return;
+    }
+
+    const productId = stocks._id;
+
+    if (!productId) {
+      alert('Falta el ID del stock');
+      return;
+    }
+
+    this.stockService.updateStock(productId, formValue).subscribe(
       (response) => {
-        alert('Updated Stock');
-        console.log(response);
+        alert('Stock actualizado');
+        console.log('Response:', response);
         this.form.reset();
-        this.getStocks;
+        this.refreshPage();
       },
       (error) => {
-        alert('Failed to update stock');
+        alert('Falló la actualización del stock');
         console.log(error);
       },
     );
-  }
-
-  onSelectProduct(product: ProductWithStock) {
-    this.selectedProduct = product;
   }
 }
