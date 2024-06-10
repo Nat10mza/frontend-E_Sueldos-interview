@@ -4,6 +4,7 @@ import { ProductService } from 'src/app/core/services/product.service';
 import { StockService } from 'src/app/core/services/stock.service';
 import { Product } from 'src/app/models/product';
 import { BuyFormComponent } from '../components/buy-form/buy-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-list-page',
@@ -15,6 +16,7 @@ export class ProductsListPageComponent implements OnInit {
   constructor(
     private stockService: StockService,
     public dialog: MatDialog,
+    public router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +43,7 @@ export class ProductsListPageComponent implements OnInit {
     //   this.getUsers();
     // });
   }
-  checkButton() {
-    alert(`Card!`);
+  checkButton(id: string | undefined) {
+    this.router.navigateByUrl('');
   }
 }

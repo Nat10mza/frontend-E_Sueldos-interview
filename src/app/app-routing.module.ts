@@ -22,7 +22,6 @@ const AuthGuardRoutes: Routes = [
   {
     path: 'products',
     canActivate: [AuthGuard],
-    pathMatch: 'full',
     loadChildren: () =>
       import('./modules/products/products.module').then(
         (m) => m.ProductsModule,
@@ -35,7 +34,6 @@ const AuthGuardRoutes: Routes = [
     children: [
       {
         path: 'users-dashboard',
-        pathMatch: 'full',
         loadChildren: () =>
           import('./modules/admin/users-dashboard/users-dashboard.module').then(
             (m) => m.UsersDashboardModule,
@@ -43,7 +41,6 @@ const AuthGuardRoutes: Routes = [
       },
       {
         path: 'products-dashboard',
-        pathMatch: 'full',
         loadChildren: () =>
           import('./modules/admin/products/products.module').then(
             (m) => m.ProductsModule,
@@ -51,7 +48,6 @@ const AuthGuardRoutes: Routes = [
       },
       {
         path: 'stock-dashboard',
-        pathMatch: 'full',
         loadChildren: () =>
           import('./modules/admin/stock/stock.module').then(
             (m) => m.StockModule,

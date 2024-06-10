@@ -6,7 +6,8 @@
     class="duration-400 w-64 transition-transform hover:animate-drop-2-top"
   >
     <a
-      (click)="checkButton()"
+      [routerLink]="['/products/detail', product._id]"
+      [state]="{ product: product }"
       class="relative z-0 grid h-full cursor-pointer content-between justify-between"
     >
       <img
