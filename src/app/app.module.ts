@@ -10,6 +10,7 @@ import { UsersDashboardModule } from './modules/admin/users-dashboard/users-dash
 import { NavbarModule } from './modules/navbar/navbar.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     HomeModule,
     NavbarModule,
     UsersDashboardModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { StockService } from 'src/app/core/services/stock.service';
 import { ProductWithStock } from 'src/app/models/stock';
 
@@ -8,7 +9,7 @@ import { ProductWithStock } from 'src/app/models/stock';
   selector: 'app-stock-dashboard',
   templateUrl: './stock-dashboard.component.html',
 })
-export class StockDashboardComponent implements OnInit {
+export class StockDashboardComponent {
   products: ProductWithStock[] = [];
   selectedProduct: ProductWithStock | undefined;
 
@@ -17,29 +18,32 @@ export class StockDashboardComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private stockService: StockService,
-    private router: Router,
+    private toastr: ToastrService,
+    private _ac: ActivatedRoute,
   ) {
     this.form = this.formBuilder.group({
       product: ['', Validators.required],
       quantity: ['', Validators.required],
     });
+
+    this.products = this._ac.snapshot.data['products'];
   }
 
-  ngOnInit(): void {
-    this.getStocks();
-  }
+  // ngOnInit(): void {
+  //   this.getStocks();
+  // }
 
-  getStocks() {
-    this.stockService.getAllStocks().subscribe(
-      (data: ProductWithStock[]) => {
-        this.products = data;
-      },
-      (error) => {
-        console.log(error);
-        alert(error.message);
-      },
-    );
-  }
+  // getStocks() {
+  //   this.stockService.getAllStocks().subscribe(
+  //     (data: ProductWithStock[]) => {
+  //       this.products = data;
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //       this.toastr.error(error.message, 'Oops!');
+  //     },
+  //   );
+  // }
 
   onSelectProduct(product: ProductWithStock) {
     this.selectedProduct = product;
@@ -51,7 +55,8 @@ export class StockDashboardComponent implements OnInit {
 
   onSubmit() {
     if (this.form.invalid) {
-      alert('Formulario inválido');
+      this.toastr.error('Formulario inválido', 'Oops!');
+
       return;
     }
 
@@ -59,7 +64,7 @@ export class StockDashboardComponent implements OnInit {
     const product = formValue.product;
 
     if (!product) {
-      alert('Producto no seleccionado');
+      this.toastr.error('Producto no seleccionado', 'Oops!');
       return;
     }
 
@@ -68,13 +73,12 @@ export class StockDashboardComponent implements OnInit {
     if (!stocks) {
       this.stockService.createStock(formValue).subscribe(
         (response) => {
-          alert('Stock creado');
-          console.log('Response:', response);
+          this.toastr.success('Stock creado', 'Exito!');
           this.form.reset();
           this.refreshPage();
         },
         (error) => {
-          alert('Falló la creación del stock');
+          this.toastr.error('Falló la creación del stock', 'Oops!');
           console.log(error);
         },
       );
@@ -84,19 +88,19 @@ export class StockDashboardComponent implements OnInit {
     const productId = stocks._id;
 
     if (!productId) {
-      alert('Falta el ID del stock');
+      this.toastr.info('Falta el ID del stock');
       return;
     }
 
     this.stockService.updateStock(productId, formValue).subscribe(
       (response) => {
-        alert('Stock actualizado');
+        this.toastr.success('Stock actualizado', 'Exito!');
         console.log('Response:', response);
         this.form.reset();
         this.refreshPage();
       },
       (error) => {
-        alert('Falló la actualización del stock');
+        this.toastr.error('Falló la actualización del stock', 'Oops!');
         console.log(error);
       },
     );

@@ -20,20 +20,24 @@ export class HomePageComponent {
     public dialog: MatDialog,
   ) {}
 
-  // ngOnInit() {
-  //   this.getUser();
-  // }
+  ngOnInit() {
+    this.getUser();
+  }
 
-  // getUser(): void {
-  //   if (!this.user) {
-  //     this.getToken.getUserLogged()?.subscribe((data) => {
-  //       if (data) {
-  //         this.UserStateService.setUser(data);
-  //       }
-  //     });
-  //   }
-  //   this.UserStateService.user$.subscribe((user) => {
-  //     this.user = user;
-  //   });
-  // }
+  getUser(): void {
+    if (!this.user) {
+      this.getToken.getUserLogged()?.subscribe((data) => {
+        if (data) {
+          this.UserStateService.setUser(data);
+        }
+      });
+    }
+    this.UserStateService.user$.subscribe((user) => {
+      this.user = user;
+    });
+  }
+  goToProductsList() {
+    if (!this.user) return this.dialog.open(LoginFormComponent);
+    return this.router.navigate(['/products']);
+  }
 }

@@ -1,3 +1,21 @@
-<div class="flex h-full w-[85vw] items-center justify-center text-8xl">
-  Home
+<div
+  class="flex h-full w-[70vw] animate-slide-in-fwd-center items-center justify-between"
+>
+  <aside>
+    <h1 class="text-5xl">E-sueldos interview</h1>
+    <h2 class="p-2 text-xl font-light">Welcome</h2>
+    <button
+      mat-stroked-button
+      (click)="goToProductsList()"
+      color="primary"
+      class="p-2"
+    >
+      See Products
+    </button>
+  </aside>
+  <img
+    src="https://e-sueldos.com/wp-content/uploads/2022/08/nerd-slider2.png"
+    alt="Home image"
+    class="h-full max-h-[80vh]"
+  />
 </div>

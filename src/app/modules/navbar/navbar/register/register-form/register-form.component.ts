@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserStateService } from 'src/app/core/services/user-state.service';
 
@@ -20,6 +21,7 @@ export class RegisterFormComponent {
     public dialogRef: MatDialogRef<RegisterFormComponent>,
     public registerService: AuthService,
     private UserStateService: UserStateService,
+    private toastr: ToastrService,
   ) {}
 
   onSubmit(f: NgForm) {
@@ -29,8 +31,10 @@ export class RegisterFormComponent {
       password: f.value.Password,
     };
 
-    if (!f.value.Username || !f.value.Email || !f.value.Password)
-      return alert('complete the form');
+    if (!f.value.Username || !f.value.Email || !f.value.Password) {
+      this.toastr.info('Just some information for you.');
+      return;
+    }
 
     this.registerService.register(user).subscribe(
       (data) => {

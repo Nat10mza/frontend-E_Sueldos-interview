@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { StockService } from 'src/app/core/services/stock.service';
 import { Product } from 'src/app/models/product';
 import { createdStock } from 'src/app/models/stock';
@@ -17,6 +18,7 @@ export class BuyFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: Product,
     public dialogRef: MatDialogRef<BuyFormComponent>,
     private stockService: StockService,
+    private toastr: ToastrService,
   ) {
     this.form = this.formBuilder.group({
       quantity: [
@@ -46,25 +48,27 @@ export class BuyFormComponent implements OnInit {
     };
 
     if (this.form.invalid) {
-      alert('Formulario inválido');
+      this.toastr.warning('Formulario inválido.');
       return;
     }
 
     if (totalStock) {
       let newStockQuantity = totalStock - quantity;
       if (newStockQuantity < 0 || newStockQuantity > totalStock) {
-        alert('No puedes comprar esa cantidad');
+        this.toastr.info('No puedes comprar esa cantidad.');
+        return;
       } else {
         newStock.product = this.data._id;
         newStock.quantity = newStockQuantity;
         this.stockService.updateStock(idStock, newStock).subscribe(
           (response) => {
-            alert('Compra exitosa');
+            this.toastr.success('Compra exitosa');
+
             this.dialogRef.close({ quantity });
             this.refreshPage();
           },
           (error) => {
-            alert('Failed');
+            this.toastr.error('Failed', 'Oops!');
             console.log(error);
           },
         );

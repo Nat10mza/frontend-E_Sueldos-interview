@@ -5,6 +5,7 @@ import { ProductService } from 'src/app/core/services/product.service';
 import { UserStateService } from 'src/app/core/services/user-state.service';
 import { createdProduct } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-product-form',
@@ -24,6 +25,7 @@ export class CreateProductFormComponent {
     public dialogRef: MatDialogRef<CreateProductFormComponent>,
     public productService: ProductService,
     private UserStateService: UserStateService,
+    private toastr: ToastrService,
   ) {}
 
   onSubmit(f: NgForm) {
@@ -48,17 +50,17 @@ export class CreateProductFormComponent {
       !f.value.image ||
       !f.value.price
     )
-      return alert('complete the form');
+      return this.toastr.info('Complete the form');
 
     this.productService.createProduct(product).subscribe(
       (response) => {
-        alert('Producto creado');
+        this.toastr.success('Producto Creado', 'Exito!');
         console.log(response);
         f.reset();
         this.dialogRef.close();
       },
       (error) => {
-        alert('Mala creación');
+        this.toastr.error('Error al crear!', 'Oops!');
         console.log(error);
       },
     );
