@@ -4,12 +4,13 @@ import { Product } from 'src/app/models/product';
 import { CreateProductFormComponent } from '../create-product-form/create-product-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products-dashboard',
   templateUrl: './products-dashboard.component.html',
 })
-export class ProductsDashboardComponent implements OnInit {
+export class ProductsDashboardComponent {
   displayedColumns: string[] = [
     'name',
     // 'id',
@@ -24,11 +25,15 @@ export class ProductsDashboardComponent implements OnInit {
     private productService: ProductService,
     public dialog: MatDialog,
     private toastr: ToastrService,
-  ) {}
-
-  ngOnInit(): void {
-    this.getProducts();
+    private _ac: ActivatedRoute,
+  ) {
+    this.dataSource = this._ac.snapshot.data['products_d'];
+    console.log(this._ac.snapshot.data['products_d']);
   }
+
+  // ngOnInit(): void {
+  //   this.getProducts();
+  // }
   getProducts() {
     this.productService.getAllProducts().subscribe(
       (data: Product[]) => {
@@ -41,6 +46,7 @@ export class ProductsDashboardComponent implements OnInit {
       },
     );
   }
+
   onCreateProductDialogOnClick() {
     const dialogRef = this.dialog.open(CreateProductFormComponent);
     dialogRef.afterClosed().subscribe(() => {
