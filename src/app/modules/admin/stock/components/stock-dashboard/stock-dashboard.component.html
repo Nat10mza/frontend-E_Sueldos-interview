@@ -1,7 +1,11 @@
 <section
-  class="animate-slide-in-fwd-center rounded-2xl border border-opacity-95 p-6"
+  class="max-w-80 animate-slide-in-fwd-center rounded-2xl border border-opacity-95 p-6"
 >
-  <h2 class="pb-4 text-center text-2xl">Manage products stock</h2>
+  <div class="flex items-center justify-center gap-2 pb-4">
+    <mat-icon>inventory_2</mat-icon>
+    <h2 class="text-center text-2xl">Manage stock</h2>
+  </div>
+
   <div class="flex w-full flex-col items-center gap-2">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form pt-4">
       <mat-form-field class="w-full">

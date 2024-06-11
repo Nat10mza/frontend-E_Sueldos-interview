@@ -7,29 +7,14 @@ import { Product } from 'src/app/models/product';
   selector: 'app-detail-page',
   templateUrl: './detail-page.component.html',
 })
-export class DetailPageComponent implements OnInit {
+export class DetailPageComponent {
   product: Product | undefined;
 
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-  ) {}
-
-  ngOnInit(): void {
-    // Obtener el ID del producto de los parámetros de la ruta
-    const expectedId = this.route.snapshot.paramMap.get('id');
-
-    // Llamar al servicio ProductService para obtener el producto por su ID
-    if (expectedId) {
-      this.productService.getProductID(expectedId).subscribe(
-        (product: Product) => {
-          this.product = product;
-          console.log(this.product);
-        },
-        (error) => {
-          console.error('Error al recuperar el producto:', error);
-        },
-      );
-    }
+    private _ac: ActivatedRoute,
+  ) {
+    this.product = this._ac.snapshot.data['product'];
   }
 }
