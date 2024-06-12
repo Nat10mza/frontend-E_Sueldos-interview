@@ -98,6 +98,7 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
       this.getUsers();
     });
   }
+
   deleteOnClick(id: string) {
     if (this.loggedUser?.id === id) {
       this.toastr.warning('You cant remove yourself');

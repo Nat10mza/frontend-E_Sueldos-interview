@@ -1,0 +1,59 @@
+<div class="max-w-80 p-6">
+  <h2 class="text-xl font-semibold">Edit Product</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form pt-4">
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Product Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter product name" />
+      <mat-error *ngIf="name?.hasError('required')"
+        >Product name is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        formControlName="price"
+        placeholder="Enter price"
+        type="number"
+      />
+      <mat-error *ngIf="price?.hasError('required')"
+        >Price is required</mat-error
+      >
+      <mat-error *ngIf="price?.hasError('min')"
+        >Price must be greater than 0</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        formControlName="description"
+        placeholder="Enter description"
+      />
+      <mat-error *ngIf="description?.hasError('required')"
+        >Description is required</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width w-full">
+      <mat-label>Image</mat-label>
+      <input matInput formControlName="image" placeholder="Enter image URL" />
+      <mat-error *ngIf="image?.hasError('required')"
+        >Image URL is required</mat-error
+      >
+    </mat-form-field>
+
+    <aside class="flex w-full justify-end">
+      <button mat-raised-button color="primary" class="h-full" type="submit">
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Edit icon"
+          fontIcon="edit"
+        ></mat-icon>
+        Edit
+      </button>
+    </aside>
+  </form>
+</div>

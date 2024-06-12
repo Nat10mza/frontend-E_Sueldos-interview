@@ -82,8 +82,11 @@
               <p class="pl-6">Actions</p>
             </th>
             <td mat-cell class="flex gap-2" *matCellDef="let element">
-              <button disabled mat-icon-button color="primary">
-                <!-- (click)="openEditDialogOnClick(element)" -->
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="openEditDialogOnClick(element)"
+              >
                 <mat-icon
                   aria-hidden="false"
                   aria-label="Edit icon"

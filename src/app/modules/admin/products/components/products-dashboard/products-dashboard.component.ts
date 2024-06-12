@@ -5,6 +5,16 @@ import { CreateProductFormComponent } from '../create-product-form/create-produc
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
+import { UpdateProductFormComponent } from '../update-form/update-form.component';
+
+interface reqBody {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  user: string;
+  price: number;
+}
 
 @Component({
   selector: 'app-products-dashboard',
@@ -49,6 +59,23 @@ export class ProductsDashboardComponent {
 
   onCreateProductDialogOnClick() {
     const dialogRef = this.dialog.open(CreateProductFormComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.getProducts();
+    });
+  }
+
+  openEditDialogOnClick(product: reqBody) {
+    const dialogRef = this.dialog.open(UpdateProductFormComponent, {
+      data: {
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        image: product.image,
+        user: product.user,
+        price: product.price,
+      },
+    });
+
     dialogRef.afterClosed().subscribe(() => {
       this.getProducts();
     });

@@ -12,12 +12,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { CreateProductFormComponent } from './components/create-product-form/create-product-form.component';
 import { ProductsDashboardComponent } from './components/products-dashboard/products-dashboard.component';
+import { UpdateProductFormComponent } from './components/update-form/update-form.component';
 
 @NgModule({
   declarations: [
     ProductsPageComponent,
     ProductsDashboardComponent,
     CreateProductFormComponent,
+    UpdateProductFormComponent,
   ],
   imports: [
     CommonModule,

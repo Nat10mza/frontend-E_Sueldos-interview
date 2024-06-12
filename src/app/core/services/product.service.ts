@@ -2,6 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product, createdProduct } from 'src/app/models/product';
 
+interface reqBody {
+  name: string;
+  email: string;
+  password: string;
+  role?: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -20,6 +27,12 @@ export class ProductService {
   createProduct(body: createdProduct) {
     return this.http.post(this.apiUrl, body);
   }
+
+  updateProduct(id: string, body: Partial<Product>) {
+    let update_apiUrl = `${this.apiUrl}/${id}`;
+    return this.http.patch(update_apiUrl, body);
+  }
+
   deleteProduct(id: string) {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
