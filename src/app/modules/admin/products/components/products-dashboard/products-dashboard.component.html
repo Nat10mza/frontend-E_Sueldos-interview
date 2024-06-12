@@ -91,9 +91,11 @@
                 ></mat-icon>
               </button>
 
-              <button disabled mat-icon-button color="primary">
-                <!-- *ngIf="element.id !== this.loggedUser?.id"
-            (click)="deleteOnClick(element.id)" -->
+              <button
+                (click)="deleteOnClick(element.id)"
+                mat-icon-button
+                color="primary"
+              >
                 <mat-icon
                   aria-hidden="false"
                   aria-label="Delete icon"

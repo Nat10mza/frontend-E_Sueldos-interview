@@ -20,4 +20,7 @@ export class ProductService {
   createProduct(body: createdProduct) {
     return this.http.post(this.apiUrl, body);
   }
+  deleteProduct(id: string) {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

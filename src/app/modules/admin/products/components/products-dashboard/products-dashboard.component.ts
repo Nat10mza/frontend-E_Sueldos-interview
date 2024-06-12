@@ -53,4 +53,17 @@ export class ProductsDashboardComponent {
       this.getProducts();
     });
   }
+
+  deleteOnClick(id: string) {
+    this.productService.deleteProduct(id).subscribe(
+      (response) => {
+        this.toastr.info('El producto se elimino con éxito', 'Info');
+        this.getProducts();
+      },
+      (error) => {
+        this.toastr.error('Error al eliminar producto', 'Oops!');
+        console.error(error);
+      },
+    );
+  }
 }
