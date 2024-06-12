@@ -8,7 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatButtonModule } from '@angular/material/button';
 
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,6 +43,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatListModule,
     MatSidenavModule,
     MatToolbarModule,
+    ReactiveFormsModule,
   ],
   exports: [NavbarComponent],
   providers: [CookieService],

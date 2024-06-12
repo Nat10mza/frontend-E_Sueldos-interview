@@ -95,7 +95,7 @@ export class UsersDashboardComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      // this.getUsers();
+      this.getUsers();
     });
   }
   deleteOnClick(id: string) {

@@ -20,19 +20,25 @@ export class BuyFormComponent implements OnInit {
     private stockService: StockService,
     private toastr: ToastrService,
   ) {
+    // Initialize the form with validators
     this.form = this.formBuilder.group({
       quantity: [
         '',
         [
           Validators.required,
-          Validators.min(0),
+          Validators.min(1),
           Validators.max(data.stocks?.quantity ?? 0),
         ],
       ],
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // Reset the form with default values if needed
+    this.form.reset({
+      quantity: '',
+    });
+  }
 
   refreshPage() {
     window.location.reload();
@@ -52,7 +58,7 @@ export class BuyFormComponent implements OnInit {
       return;
     }
 
-    if (totalStock) {
+    if (totalStock !== undefined && totalStock !== null) {
       let newStockQuantity = totalStock - quantity;
       if (newStockQuantity < 0 || newStockQuantity > totalStock) {
         this.toastr.info('No puedes comprar esa cantidad.');
@@ -63,7 +69,6 @@ export class BuyFormComponent implements OnInit {
         this.stockService.updateStock(idStock, newStock).subscribe(
           (response) => {
             this.toastr.success('Compra exitosa');
-
             this.dialogRef.close({ quantity });
             this.refreshPage();
           },
@@ -74,5 +79,9 @@ export class BuyFormComponent implements OnInit {
         );
       }
     }
+  }
+
+  get quantity() {
+    return this.form.get('quantity');
   }
 }

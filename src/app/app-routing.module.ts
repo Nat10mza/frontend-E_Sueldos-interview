@@ -72,6 +72,12 @@ const AuthGuardRoutes: Routes = [
     ],
   },
 
+  // Redirección no autorizado
+
+  {
+    path: 'not-authorized',
+    component: NotAuthorizedPageComponent,
+  },
   // Redirección por defecto
   { path: '**', redirectTo: '' },
 ];

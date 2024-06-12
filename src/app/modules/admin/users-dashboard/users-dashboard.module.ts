@@ -10,7 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { UsersDashboardComponent } from './components/users-dashboard/users-dashboard.component';
 import { MatIconModule } from '@angular/material/icon';
 import { UpdateFormComponent } from './components/update-form/update-form.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { CreateUserFormComponent } from './components/create-user-form/create-user-form.component';
@@ -31,6 +31,7 @@ import { CreateUserFormComponent } from './components/create-user-form/create-us
     MatFormFieldModule,
     MatSelectModule,
     MatIconModule,
+    ReactiveFormsModule,
     FormsModule,
     MatInputModule,
   ],

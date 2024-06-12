@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -9,32 +9,52 @@ import { UserStateService } from 'src/app/core/services/user-state.service';
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
 })
-export class RegisterFormComponent {
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-  });
+export class RegisterFormComponent implements OnInit {
+  form: FormGroup;
   submitted = false;
 
   constructor(
+    private fb: FormBuilder,
     public dialogRef: MatDialogRef<RegisterFormComponent>,
     public registerService: AuthService,
     private UserStateService: UserStateService,
     private toastr: ToastrService,
-  ) {}
+  ) {
+    // Initialize the form with validators
+    this.form = this.fb.group({
+      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.pattern(/^(?=.*[A-Za-z]).+$/),
+        ],
+      ],
+    });
+  }
 
-  onSubmit(f: NgForm) {
-    const user = {
-      name: f.value.Username,
-      email: f.value.Email,
-      password: f.value.Password,
-    };
+  ngOnInit(): void {
+    // Optionally, reset the form to initial data on init
+    this.form.reset({
+      username: '',
+      email: '',
+      password: '',
+    });
+  }
 
-    if (!f.value.Username || !f.value.Email || !f.value.Password) {
-      this.toastr.info('Just some information for you.');
+  onSubmit() {
+    if (this.form.invalid) {
+      this.toastr.info('Complete the form.');
       return;
     }
+
+    const user = {
+      name: this.form.value.username,
+      email: this.form.value.email,
+      password: this.form.value.password,
+    };
 
     this.registerService.register(user).subscribe(
       (data) => {
@@ -45,7 +65,7 @@ export class RegisterFormComponent {
         );
 
         this.submitted = true;
-        f.reset();
+        this.form.reset();
 
         this.submitted = false;
 
@@ -54,8 +74,21 @@ export class RegisterFormComponent {
       },
 
       (error) => {
+        this.toastr.error('Error in registration', 'Oops!');
         console.log(error);
       },
     );
+  }
+
+  get username() {
+    return this.form.get('username');
+  }
+
+  get email() {
+    return this.form.get('email');
+  }
+
+  get password() {
+    return this.form.get('password');
   }
 }

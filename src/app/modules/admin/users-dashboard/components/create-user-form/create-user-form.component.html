@@ -1,67 +1,61 @@
 <div class="max-w-80 p-6">
   <h2 class="text-xl font-semibold">Create User</h2>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form pt-4">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form pt-4">
     <mat-form-field class="example-full-width w-full">
       <mat-label>Username</mat-label>
-      <input
-        matInput
-        ngModel
-        required
-        name="username"
-        placeholder="Enter username"
-        #first="ngModel"
-      />
+      <input matInput formControlName="Username" placeholder="Enter username" />
+      <mat-error *ngIf="username?.hasError('required')"
+        >Username is required</mat-error
+      >
+      <mat-error *ngIf="username?.hasError('minlength')"
+        >Username must be at least 3 characters long</mat-error
+      >
     </mat-form-field>
+
     <mat-form-field class="example-full-width w-full">
       <mat-label>Email</mat-label>
-      <input
-        matInput
-        ngModel
-        required
-        name="email"
-        placeholder="Enter email"
-        #first="ngModel"
-      />
+      <input matInput formControlName="Email" placeholder="Enter email" />
+      <mat-error *ngIf="email?.hasError('required')"
+        >Email is required</mat-error
+      >
+      <mat-error *ngIf="email?.hasError('email')"
+        >Invalid email address</mat-error
+      >
     </mat-form-field>
+
     <mat-form-field class="example-full-width w-full">
       <mat-label>Password</mat-label>
       <input
         matInput
-        ngModel
-        required
-        value="Password"
-        name="password"
+        formControlName="Password"
         placeholder="Enter password"
-        #first="ngModel"
+        type="password"
       />
+      <mat-error *ngIf="password?.hasError('required')"
+        >Password is required</mat-error
+      >
+      <mat-error *ngIf="password?.hasError('minlength')"
+        >Password must be at least 6 characters long</mat-error
+      >
     </mat-form-field>
+
     <mat-form-field class="example-full-width w-full">
       <mat-label>Role</mat-label>
-      <mat-select name="role" #first="ngModel" ngModel>
+      <mat-select formControlName="Role">
         <mat-option *ngFor="let role of roles" [value]="role.value">{{
           role.viewValue
         }}</mat-option>
       </mat-select>
-      <!-- <input
-        matInput
-        ngModel
-        required
-        value="Role"
-        name="role"
-        placeholder="Enter role"
-        #first="ngModel"
-      /> -->
+      <mat-error *ngIf="role?.hasError('required')">Role is required</mat-error>
     </mat-form-field>
+
     <aside class="flex w-full justify-end">
       <button mat-raised-button color="primary" class="h-full">
         <mat-icon
           aria-hidden="false"
-          aria-label="Create
-     icon"
-          fontIcon="how_to_reg
-    "
+          aria-label="Create icon"
+          fontIcon="how_to_reg"
         ></mat-icon>
-
         Create
       </button>
     </aside>

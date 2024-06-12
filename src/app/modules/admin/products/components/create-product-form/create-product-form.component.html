@@ -1,62 +1,57 @@
 <div class="max-w-80 p-6">
   <h2 class="text-xl font-semibold">Create Product</h2>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form pt-4">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form pt-4">
     <mat-form-field class="example-full-width w-full">
       <mat-label>Product name</mat-label>
-      <input
-        matInput
-        ngModel
-        required
-        name="name"
-        placeholder="Enter product name"
-        #first="ngModel"
-      />
+      <input matInput formControlName="name" placeholder="Enter product name" />
+      <mat-error *ngIf="name?.hasError('required')"
+        >Product name is required</mat-error
+      >
     </mat-form-field>
+
     <mat-form-field class="example-full-width w-full">
       <mat-label>Price</mat-label>
       <input
         matInput
-        ngModel
-        required
-        name="price"
+        formControlName="price"
         placeholder="Enter price"
-        #first="ngModel"
+        type="number"
       />
+      <mat-error *ngIf="price?.hasError('required')"
+        >Price is required</mat-error
+      >
+      <mat-error *ngIf="price?.hasError('min')"
+        >Price must be greater than 0</mat-error
+      >
     </mat-form-field>
+
     <mat-form-field class="example-full-width w-full">
       <mat-label>Description</mat-label>
       <input
         matInput
-        ngModel
-        required
-        value="Description"
-        name="description"
+        formControlName="description"
         placeholder="Enter description"
-        #first="ngModel"
       />
+      <mat-error *ngIf="description?.hasError('required')"
+        >Description is required</mat-error
+      >
     </mat-form-field>
+
     <mat-form-field class="example-full-width w-full">
       <mat-label>Image</mat-label>
-      <input
-        matInput
-        ngModel
-        required
-        value="Image"
-        name="image"
-        placeholder="Enter image"
-        #first="ngModel"
-      />
+      <input matInput formControlName="image" placeholder="Enter image URL" />
+      <mat-error *ngIf="image?.hasError('required')"
+        >Image URL is required</mat-error
+      >
     </mat-form-field>
+
     <aside class="flex w-full justify-end">
-      <button mat-raised-button color="primary" class="h-full">
+      <button mat-raised-button color="primary" class="h-full" type="submit">
         <mat-icon
           aria-hidden="false"
-          aria-label="Create
-     icon"
-          fontIcon="how_to_reg
-    "
+          aria-label="Create icon"
+          fontIcon="how_to_reg"
         ></mat-icon>
-
         Create
       </button>
     </aside>

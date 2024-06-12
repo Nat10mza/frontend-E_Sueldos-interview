@@ -1,4 +1,4 @@
-<div class="max-w-56 p-4">
+<div class="p-4">
   <h2 class="text-2xl font-medium">{{ data.name }}</h2>
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
     <mat-form-field appearance="fill" floatLabel="always" class="w-full">
@@ -11,11 +11,18 @@
         min="0"
         [max]="data.stocks?.quantity ?? 0"
       />
+      <mat-error *ngIf="quantity?.hasError('required')"
+        >Quantity is required</mat-error
+      >
+      <mat-error *ngIf="quantity?.hasError('min')"
+        >Quantity must be at least 1</mat-error
+      >
+      <mat-error *ngIf="quantity?.hasError('max')">Quantity exceed </mat-error>
     </mat-form-field>
     <button
       mat-flat-button
       color="primary"
-      class="mb-6 flex w-full p-3"
+      class="mb-6 flex w-full p-3 pt-5"
       type="submit"
     >
       Buy

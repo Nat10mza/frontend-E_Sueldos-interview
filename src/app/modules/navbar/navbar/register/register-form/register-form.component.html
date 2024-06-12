@@ -1,49 +1,51 @@
 <div class="max-w-80 p-6">
   <h2 class="text-xl font-semibold">Register</h2>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form pt-4">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form pt-4">
     <mat-form-field class="example-full-width w-full">
       <mat-label>Username</mat-label>
-      <input
-        matInput
-        ngModel
-        required
-        name="Username"
-        placeholder="Username"
-        #first="ngModel"
-      />
+      <input matInput formControlName="username" placeholder="Username" />
+      <mat-error *ngIf="username?.hasError('required')"
+        >Username is required</mat-error
+      >
     </mat-form-field>
+
     <mat-form-field class="example-full-width w-full">
       <mat-label>Email</mat-label>
-      <input
-        matInput
-        ngModel
-        required
-        name="Email"
-        placeholder="Email"
-        #first="ngModel"
-      />
+      <input matInput formControlName="email" placeholder="Email" />
+      <mat-error *ngIf="email?.hasError('required')"
+        >Email is required</mat-error
+      >
+      <mat-error *ngIf="email?.hasError('email')"
+        >Invalid email address</mat-error
+      >
     </mat-form-field>
+
     <mat-form-field class="example-full-width w-full">
       <mat-label>Password</mat-label>
       <input
         matInput
-        ngModel
-        required
-        name="Password"
+        formControlName="password"
         placeholder="Password"
-        #first="ngModel"
+        type="password"
       />
+      <mat-error *ngIf="password?.hasError('required')"
+        >Password is required</mat-error
+      >
+      <mat-error *ngIf="password?.hasError('minlength')"
+        >Password must be at least 6 characters long</mat-error
+      >
+      <mat-error *ngIf="password?.hasError('pattern')"
+        >Password must contain at least one letter</mat-error
+      >
     </mat-form-field>
+
     <aside class="flex w-full justify-end">
-      <button mat-raised-button color="primary" class="h-full">
+      <button mat-raised-button color="primary" class="h-full" type="submit">
         <mat-icon
           aria-hidden="false"
-          aria-label="How To Reg
-     icon"
-          fontIcon="how_to_reg
-    "
+          aria-label="How To Reg icon"
+          fontIcon="how_to_reg"
         ></mat-icon>
-
         Register
       </button>
     </aside>

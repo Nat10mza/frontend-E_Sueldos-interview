@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { UserStateService } from 'src/app/core/services/user-state.service';
@@ -10,36 +10,48 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
 })
-export class LoginFormComponent {
-  form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+export class LoginFormComponent implements OnInit {
+  form: FormGroup;
   submitted = false;
 
   constructor(
+    private fb: FormBuilder,
     public dialogRef: MatDialogRef<LoginFormComponent>,
     public dialogRegister: MatDialog,
     public loginService: AuthService,
-    private UserStateService: UserStateService,
+    private userStateService: UserStateService,
     private toastr: ToastrService,
-  ) {}
+  ) {
+    // Initialize the form with validators
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  ngOnInit(): void {
+    // Optionally, reset the form to ensure it's empty on init
+    this.form.reset({
+      email: '',
+      password: '',
+    });
+  }
 
   openRegisterDialog() {
     this.dialogRef.close();
     this.dialogRegister.open(RegisterFormComponent);
   }
 
-  onSubmit(f: NgForm) {
-    const user = {
-      email: f.value.Email,
-      password: f.value.Password,
-    };
-
-    if (!f.value.Email || !f.value.Password) {
+  onSubmit() {
+    if (this.form.invalid) {
       this.toastr.info('Complete the form.');
       return;
     }
+
+    const user = {
+      email: this.form.value.email,
+      password: this.form.value.password,
+    };
 
     this.loginService.login(user).subscribe(
       (data) => {
@@ -48,10 +60,10 @@ export class LoginFormComponent {
           data.tokens.refresh.token,
           data.user.id,
         );
-        this.UserStateService.setUser(data.user);
+        this.userStateService.setUser(data.user);
 
         this.submitted = true;
-        f.reset();
+        this.form.reset();
         this.submitted = false;
         this.dialogRef.close();
         this.toastr.success('Bienvenido!', 'Exito!');
@@ -62,5 +74,13 @@ export class LoginFormComponent {
         console.log(error);
       },
     );
+  }
+
+  get email() {
+    return this.form.get('email');
+  }
+
+  get password() {
+    return this.form.get('password');
   }
 }

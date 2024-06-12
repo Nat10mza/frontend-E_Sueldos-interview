@@ -1,24 +1,43 @@
-<div class="flex min-w-80 flex-col p-6">
+<div class="flex max-w-80 flex-col p-6">
   <h2 class="text-center text-xl font-semibold">Login</h2>
-  <form #f="ngForm" (ngSubmit)="onSubmit(f)" class="example-form pt-4">
-    <p class="">Email</p>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="example-form pt-4">
     <mat-form-field class="w-full">
-      <input matInput ngModel name="Email" placeholder="Enter email" />
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Enter email" />
+      <mat-error *ngIf="email?.hasError('required')"
+        >Email is required</mat-error
+      >
+      <mat-error *ngIf="email?.hasError('email')"
+        >Invalid email address</mat-error
+      >
     </mat-form-field>
 
-    <p class="">Password</p>
     <mat-form-field class="w-full">
-      <input matInput ngModel name="Password" placeholder="Enter password" />
+      <mat-label>Password</mat-label>
+      <input
+        matInput
+        formControlName="password"
+        placeholder="Enter password"
+        type="password"
+      />
+      <mat-error *ngIf="password?.hasError('required')"
+        >Password is required</mat-error
+      >
+      <mat-error *ngIf="password?.hasError('minlength')"
+        >Password must be at least 6 characters long</mat-error
+      >
     </mat-form-field>
+
     <p class="pb-2 text-sm">
-      if you don't have an acount
+      if you don't have an account
       <a
         (click)="openRegisterDialog()"
         class="cursor-pointer underline hover:text-red-700"
         >Register Here!</a
       >
     </p>
-    <button mat-raised-button color="primary" class="w-full">
+
+    <button mat-raised-button color="primary" class="w-full" type="submit">
       <mat-icon
         aria-hidden="false"
         aria-label="Login icon"

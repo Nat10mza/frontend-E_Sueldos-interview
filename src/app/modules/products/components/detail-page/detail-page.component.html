@@ -6,6 +6,14 @@
     <p class="text-6xl">{{ product?.name }}</p>
     <p class="text-xl">${{ product?.price }} ARS</p>
     <p>{{ product?.description }}</p>
-    <button mat-flat-button color="primary" class="w-full">Buy</button>
+    <button
+      mat-raised-button
+      color="primary"
+      class="duration-400 mb-2 w-full transition-transform hover:-translate-y-0.5 hover:transition"
+      *ngIf="this.product"
+      (click)="buyProduct(this.product); $event.stopPropagation()"
+    >
+      Buy
+    </button>
   </section>
 </main>
